@@ -85,7 +85,7 @@ const Product = () => {
               -
             </div>
           </div>
-          <button className="font-montserrat fixed bottom-16 md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-4 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center">
+          <button className="font-montserrat fixed bottom-[70px] md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center">
             <div className="text-xs">
               Total: ${(selectedProduct.price * quantity).toFixed(2)}
             </div>

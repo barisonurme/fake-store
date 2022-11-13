@@ -1,7 +1,10 @@
 import React from "react";
 
-import { HiOutlineHome, HiOutlineShoppingCart } from "react-icons/hi";
-import { HiBars3 } from "react-icons/hi2";
+import {
+  HiOutlineHome,
+  HiOutlineShoppingCart,
+  HiOutlineMenu,
+} from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentPage } from "../app/slicer";
 
@@ -26,6 +29,7 @@ const Footer = (props) => {
 
       {/* Cart */}
       <div
+        onClick={() => dispatch(setCurrentPage("cart"))}
         className={`${footerHeight} w-12 flex flex-col items-center justify-evenly hover:text-sky-500 duration-500 ${
           currentPage === "cart" && "text-sky-500"
         }`}
@@ -39,7 +43,7 @@ const Footer = (props) => {
           currentPage === "settings" && "text-sky-500"
         }`}
       >
-        <HiBars3 size={25} />
+        <HiOutlineMenu size={25} />
       </div>
     </div>
   );

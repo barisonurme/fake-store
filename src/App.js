@@ -7,7 +7,7 @@ import ProductList from "./components/Products/ProductList";
 function App() {
   useEffect(() => {}, []);
 
-  const headerHeight = "h-14";
+  const headerHeight = "h-16";
   const footerHeight = "h-14";
 
   return (
