@@ -4,10 +4,20 @@ import Ratings from "../Ratings";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const FetchAllData = async () => {
+    // Fetch All Products
     const fetchedProducts = await FetchAllProduct();
     console.log(fetchedProducts);
     setProducts(fetchedProducts);
+
+    // Define categories
+    let tempCategories = [];
+    fetchedProducts.forEach((product) => {
+      if (!tempCategories.includes(product.category))
+      tempCategories.push(product.category);
+    });
+    console.log(tempCategories);
   };
 
   useEffect(() => {

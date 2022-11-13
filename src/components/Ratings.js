@@ -2,7 +2,6 @@ import React from "react";
 
 const Ratings = (props) => {
   const { rating } = props;
-  console.log(rating);
   return <div className="text-xs">{`Ratings: ${rating.rate}/5 (${rating.count})`}</div>;
 };
 
