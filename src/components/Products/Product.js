@@ -28,7 +28,7 @@ const Product = () => {
           onClick={() => setZoom(!zoom)}
           className={`${
             zoom ? "fixed w-screen h-full cursor-zoom-out -translate-y-16" : "relative cursor-zoom-in max-h-64 md:max-h-[1000px] "
-          } bg-white flex justify-center w-full p-4 md:p-14 z-50`}
+          } bg-white flex justify-center w-full p-4 md:p-14 z-50 max-w-5xl`}
         >
           <img src={selectedProduct.image} className="object-contain" />
         </section>
