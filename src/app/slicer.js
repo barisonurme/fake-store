@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "@testing-library/react";
 
 const initialState = {
   currentPage: "main",
@@ -19,6 +20,13 @@ const uiSlice = createSlice({
     setSelectedProduct(state, action) {
       state.selectedProduct = action.payload;
     },
+    addLocalCartItems(state, action) {
+      const { localCartItems, cartItemsQuantity, totalCartAmount } =
+        action.payload;
+      state.cartItems = localCartItems;
+      state.cartItemsQuantity = cartItemsQuantity;
+      state.totalCartAmount = totalCartAmount;
+    },
     addProductToCart(state, action) {
       const { selectedProduct, quantity } = action.payload;
 
@@ -28,11 +36,20 @@ const uiSlice = createSlice({
           state.cartItems[i].quantity = state.cartItems[i].quantity + quantity;
           state.cartItemsQuantity =
             state.cartItemsQuantity + action.payload.quantity;
-
+          localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+          localStorage.setItem(
+            "cartItemsQuantity",
+            JSON.stringify(state.cartItemsQuantity)
+          );
           state.totalCartAmount = (
             parseFloat(state.totalCartAmount) +
             selectedProduct.price * quantity
           ).toFixed(2);
+          localStorage.setItem(
+            "totalCartAmount",
+            JSON.stringify(state.totalCartAmount)
+          );
+
           return;
         }
       }
@@ -42,15 +59,29 @@ const uiSlice = createSlice({
       state.cartItemsQuantity =
         state.cartItemsQuantity + action.payload.quantity;
 
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      localStorage.setItem(
+        "cartItemsQuantity",
+        JSON.stringify(state.cartItemsQuantity)
+      );
+
       state.totalCartAmount = (
-        state.totalCartAmount +
+        parseFloat(state.totalCartAmount) +
         selectedProduct.price * quantity
       ).toFixed(2);
+      localStorage.setItem(
+        "totalCartAmount",
+        JSON.stringify(state.totalCartAmount)
+      );
     },
   },
 });
 
-export const { setCurrentPage, setSelectedProduct, addProductToCart } =
-  uiSlice.actions;
+export const {
+  setCurrentPage,
+  setSelectedProduct,
+  addProductToCart,
+  addLocalCartItems,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;

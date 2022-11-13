@@ -1,7 +1,7 @@
 import React from "react";
 
 import { setCurrentPage } from "../../app/slicer";
-import { HiChevronLeft } from "react-icons/hi";
+import { HiChevronLeft, HiOutlineX } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 
 const Cart = () => {
@@ -15,7 +15,7 @@ const Cart = () => {
       <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4">
         <div
           onClick={() => {
-            dispatch(setCurrentPage("product"));
+            dispatch(setCurrentPage("main"));
           }}
           className="w-12 h-12 border rounded-xl flex justify-center items-center ml-2 lg:ml-10 lg:mr-10  bg-white"
         >
@@ -33,7 +33,7 @@ const Cart = () => {
       )}
       <div className="w-full max-w-7xl flex flex-col p-4">
         {cartItems.map((product) => (
-          <ul key={product.id} className="flex w-full border p-1 mb-2">
+          <ul key={product.id} className="flex justify-center items-center w-full border p-1 mb-2">
             <div className="flex justify-center w-12 h-12 m-4">
               <img src={product.image} className="object-contain h-12" />
             </div>
@@ -46,6 +46,7 @@ const Cart = () => {
                 ${product.price}
               </div>
             </div>
+            <HiOutlineX size={15} className="mr-4" />
           </ul>
         ))}
       </div>
