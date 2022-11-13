@@ -11,7 +11,9 @@ import { setCurrentPage } from "../app/slicer";
 const Footer = (props) => {
   const { footerHeight } = props;
   const dispatch = useDispatch();
-  const currentPage = useSelector((store) => store.uiSlice.currentPage);
+  const slice = useSelector((store) => store.uiSlice);
+  const currentPage = slice.currentPage;
+  const cartItemsQuantity = slice.cartItemsQuantity;
 
   return (
     <div
@@ -35,6 +37,9 @@ const Footer = (props) => {
         }`}
       >
         <HiOutlineShoppingCart size={25} />
+        <div className="absolute flex font-bold font-montserrat w-4 h-4 bg-white text-sky-500 justify-center align-middle items-center text-xs translate-x-3 -translate-y-3 rounded-full">
+          {cartItemsQuantity}
+        </div>
       </div>
 
       {/* Cart */}

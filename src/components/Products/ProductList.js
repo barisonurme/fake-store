@@ -41,34 +41,35 @@ const ProductList = (props) => {
             <FilterHandler />
             <SortHandler />
           </div>
-          <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-8 p-4">
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-8 p-4">
             {products.map((product) => (
               <li
                 onClick={() => {
                   dispatch(setSelectedProduct(product));
                   dispatch(setCurrentPage("product"));
                 }}
-                className=" bg-gray-100 overflow-hidden text-left cursor-pointer flex flex-col rounded-sm justify-between border border-gray-200 p-2 shadow-sm"
+                className=" overflow-hidden text-left cursor-pointer flex flex-col rounded-sm justify-between border border-gray-200 p-2 shadow-sm"
                 key={product.id}
               >
                 <section className="flex items-center  flex-col w-full">
-                  <div className="flex flex-col border justify-center items-center w-full h-56 pr-6 pl-6 bg-white">
+                  <div className="flex flex-col border justify-center bg-white items-center w-full h-56 pr-6 pl-6">
                     <img
                       alt={product.title}
                       className="h-28 object-contain"
                       src={product.image}
                     />
                   </div>
-                  <div className="flex justify-start w-full font-bold text-sm text-gray-700 p-4 max-h-10 overflow-hidden font-montserrat">
+                  <div className="flex justify-start w-full font-bold text-sm text-gray-700 p-4 max-h-10 overflow-hidden">
                     {product.title}
                   </div>
-                  <div className="w-full pl-4  font-montserrat">
+                  <div className="w-full pl-4">
                     <Ratings rating={product.rating} />
                   </div>
                 </section>
                 <section className="w-full flex flex-col items-start p-4 "></section>
-                <div className="w-full font-bold text-xl pl-4 pr-4 pb-4 font-montserrat">
+                <div className="w-full font-bold text-xl pl-4 pr-4 pb-4">
                   ${product.price}
+
                 </div>
               </li>
             ))}

@@ -2,7 +2,8 @@ import { useSelector } from "react-redux";
 import { HiChevronLeft } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { setCurrentPage } from "../../app/slicer";
+import { setCurrentPage, addProductToCart } from "../../app/slicer";
+import { toast } from "react-toastify";
 
 const Product = () => {
   const [zoom, setZoom] = useState(false);
@@ -18,6 +19,8 @@ const Product = () => {
       case "decrease":
         if (quantity === 1) return;
         setQuantity(quantity - 1);
+        break;
+      default:
         break;
     }
   };
@@ -51,11 +54,12 @@ const Product = () => {
           onClick={() => setZoom(!zoom)}
           className={`${
             zoom
-              ? "bg-white fixed w-screen h-[calc(100vh-360px)] top-1/2 left-1/2 cursor-zoom-out -translate-x-1/2 -translate-y-1/2 m-auto inset-x-0 inset-y-0 "
-              : "bg-gray-100 relative cursor-zoom-in max-h-64 md:max-h-[1000px] "
-          }flex mt-1 md:mt-4 justify-center w-full p-4 md:p-14 z-50 max-w-5xl border`}
+              ? "bg-white  z-50 fixed w-screen h-[calc(100vh-360px)] top-1/2 left-1/2 cursor-zoom-out -translate-x-1/2 -translate-y-1/2 m-auto inset-x-0 inset-y-0 "
+              : "bg-gray-100 z-0 relative cursor-zoom-in max-h-64 md:max-h-[1000px] "
+          }flex mt-1 md:mt-4 justify-center w-full p-4 md:p-14 max-w-5xl border`}
         >
           <img
+            alt={selectedProduct.title}
             src={selectedProduct.image}
             className="object-contain mix-blend-multiply"
           />
@@ -85,7 +89,23 @@ const Product = () => {
               -
             </div>
           </div>
-          <button className="font-montserrat fixed bottom-[70px] md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center">
+          <button
+            onClick={() => {
+              disaptch(addProductToCart({ selectedProduct, quantity }));
+              disaptch(setCurrentPage("main"));
+              toast.success("Product Added to Cart", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              });
+            }}
+            className="font-montserrat fixed bottom-[70px] md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
+          >
             <div className="text-xs">
               Total: ${(selectedProduct.price * quantity).toFixed(2)}
             </div>
