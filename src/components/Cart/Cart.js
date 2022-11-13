@@ -1,6 +1,10 @@
 import React from "react";
 
-import { setCurrentPage } from "../../app/slicer";
+import {
+  deleteItemFromCart,
+  setCurrentPage,
+  totalCartAmountCalc,
+} from "../../app/slicer";
 import { HiChevronLeft, HiOutlineX } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -33,7 +37,10 @@ const Cart = () => {
       )}
       <div className="w-full max-w-7xl flex flex-col p-4">
         {cartItems.map((product) => (
-          <ul key={product.id} className="flex justify-center items-center w-full border p-1 mb-2">
+          <ul
+            key={product.id}
+            className="flex justify-center items-center w-full border p-1 mb-2"
+          >
             <div className="flex justify-center w-12 h-12 m-4">
               <img src={product.image} className="object-contain h-12" />
             </div>
@@ -46,17 +53,26 @@ const Cart = () => {
                 ${product.price}
               </div>
             </div>
-            <HiOutlineX size={15} className="mr-4" />
+            <HiOutlineX
+              onClick={() => {
+                dispatch(deleteItemFromCart(product.id));
+                dispatch(totalCartAmountCalc());
+              }}
+              size={15}
+              className="mr-4"
+            />
           </ul>
         ))}
       </div>
-      <button className="font-montserrat fixed bottom-[70px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center">
-        <div className="text-xs">Total Amount: {totalCartAmount}</div>
-        <div className="flex justify-center items-center text-2xl">
-          Checkout
-          <HiChevronLeft className="rotate-180" />
-        </div>
-      </button>
+      {totalCartAmount > 0 && (
+        <button className="font-montserrat fixed bottom-[70px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center">
+          <div className="text-xs">Total Amount: {totalCartAmount}</div>
+          <div className="flex justify-center items-center text-2xl">
+            Checkout
+            <HiChevronLeft className="rotate-180" />
+          </div>
+        </button>
+      )}
     </>
   );
 };

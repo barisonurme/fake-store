@@ -14,6 +14,32 @@ const uiSlice = createSlice({
   name: "uiSlice",
   initialState,
   reducers: {
+    deleteItemFromCart(state, action) {
+      state.cartItems = state.cartItems.filter((item) => {
+        return item.id !== action.payload;
+      });
+
+      state.cartItemsQuantity = 0;
+      state.cartItems.forEach((item) => {
+        state.cartItemsQuantity = state.cartItemsQuantity + item.quantity;
+      });
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      localStorage.setItem(
+        "cartItemsQuantity",
+        JSON.stringify(state.cartItemsQuantity)
+      );
+    },
+    totalCartAmountCalc(state) {
+      state.totalCartAmount = 0;
+      state.cartItems.forEach((item) => {
+        state.totalCartAmount =
+          state.totalCartAmount + item.price * item.quantity;
+      });
+      localStorage.setItem(
+        "totalCartAmount",
+        JSON.stringify(state.totalCartAmount)
+      );
+    },
     setCurrentPage(state, action) {
       state.currentPage = action.payload;
     },
@@ -82,6 +108,8 @@ export const {
   setSelectedProduct,
   addProductToCart,
   addLocalCartItems,
+  deleteItemFromCart,
+  totalCartAmountCalc,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
