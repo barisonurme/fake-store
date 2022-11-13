@@ -4,6 +4,7 @@ const initialState = {
   currentPage: "main",
   isLoggedIn: false,
   selectedProduct: [],
+  cartItems: [],
 };
 
 const uiSlice = createSlice({
@@ -16,9 +17,10 @@ const uiSlice = createSlice({
     setSelectedProduct(state, action) {
       state.selectedProduct = action.payload;
     },
+    addProductToCart(state, action) {},
   },
 });
 
-export const { setCurrentPage , setSelectedProduct } = uiSlice.actions;
+export const { setCurrentPage, setSelectedProduct } = uiSlice.actions;
 
 export default uiSlice.reducer;
