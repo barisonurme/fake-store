@@ -65,7 +65,10 @@ const Cart = () => {
         ))}
       </div>
       {totalCartAmount > 0 && (
-        <button className="font-montserrat fixed bottom-[70px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center">
+        <button
+          onClick={() => dispatch(setCurrentPage("checkout"))}
+          className="font-montserrat fixed bottom-[70px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
+        >
           <div className="text-xs">Total Amount: {totalCartAmount}</div>
           <div className="flex justify-center items-center text-2xl">
             Checkout

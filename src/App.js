@@ -13,6 +13,7 @@ import { GoToCart } from "./components/Cart/GoToCart";
 import { addLocalCartItems } from "./app/slicer";
 import Settings from "./components/Settings";
 import UserLogin from "./components/UserLogin";
+import Checkout from "./components/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function App() {
       {currentPage === "cart" && <Cart />}
       {currentPage === "settings" && <Settings />}
       {currentPage === "login" && <UserLogin />}
+      {currentPage === "checkout" && <Checkout />}
       <div className={`${footerHeight} w-full visible lg:hidden `}></div>
     </div>
   );

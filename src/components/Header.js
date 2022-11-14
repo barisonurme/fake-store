@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 
 export const Header = (props) => {
   const { headerHeight } = props;
-  const selector = useSelector((store) => store.uiSlice);
-  const currentPage = selector.currentPage;
-  const isLoggedIn = selector.isLoggedIn;
+  const slice = useSelector((store) => store.uiSlice);
+  const currentPage = slice.currentPage;
+  const isLoggedIn = slice.isLoggedIn;
+  const cartItemsQuantity = slice.cartItemsQuantity;
+  
   return (
     <div
       className={`flex fixed top-0 justify-between max-w-7xl w-full ${headerHeight} bg-gray-900 items-center p-4 text-white`}
@@ -19,7 +21,7 @@ export const Header = (props) => {
         {!isLoggedIn && currentPage !== "login" && <HeaderUser />}
         {isLoggedIn && (
           <div className="flex">
-            <HeaderCart />
+            <HeaderCart cartItemsQuantity={cartItemsQuantity}/>
           </div>
         )}
       </div>

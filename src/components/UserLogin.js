@@ -17,6 +17,7 @@ const UserLogin = () => {
     if (loading) return;
     setLoading(false);
     dispatch(userLoginState({ status: "loginSuccess", username: "testUser" }));
+    dispatch(setCurrentPage("main"));
   };
   return (
     <div className="w-full flex justify-center flex-col font-montserrat">
