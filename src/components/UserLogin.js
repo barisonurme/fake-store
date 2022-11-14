@@ -12,11 +12,15 @@ const UserLogin = () => {
 
   const submitFormHandler = async (e) => {
     e.preventDefault();
+
     setLoading(true);
-    UserLoginHandler({ username: "mor_2314", password: "83r5^_" });
+    const response = await UserLoginHandler({
+      username: "johnd",
+      password: "m38rmF",
+    });
     if (loading) return;
     setLoading(false);
-    dispatch(userLoginState({ status: "loginSuccess", username: "testUser" }));
+    dispatch(userLoginState({ status: "loginSuccess", user: response }));
     dispatch(setCurrentPage("main"));
   };
   return (

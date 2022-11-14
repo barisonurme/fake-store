@@ -8,7 +8,7 @@ const initialState = {
   cartItems: [],
   cartItemsQuantity: 0,
   totalCartAmount: 0,
-  username: "",
+  user: {},
   darkMode: false,
 };
 
@@ -106,15 +106,15 @@ const uiSlice = createSlice({
       state.darkMode = action.payload;
     },
     userLoginState(state, action) {
-      const { status, username } = action.payload;
+      const { status, user } = action.payload;
       switch (status) {
         case "loginSuccess":
           state.isLoggedIn = true;
-          state.username = username;
+          state.user = user;
           break;
         case "logoutSuccess":
           state.isLoggedIn = false;
-          state.username = "";
+          state.user = {};
           break;
 
         default:

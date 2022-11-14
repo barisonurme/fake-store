@@ -7,7 +7,7 @@ const Settings = () => {
   const dispatch = useDispatch();
   const slice = useSelector((store) => store.uiSlice);
   const darkMode = slice.darkMode;
-  const username = slice.username;
+  const user = slice.user;
 
   return (
     <div className="w-full flex justify-center flex-col font-montserrat">
@@ -48,7 +48,7 @@ const Settings = () => {
         <div className="w-full flex justify-center">User Settings</div>
         <div className="flex w-full h-px bg-gray-200" />
         <div className="flex flex-col items-start justify-between">
-          <div className="p-4">Username: {username}</div>
+          <div className="p-4">Username: {user.username}</div>
           <button className="flex w-full justify-center items-center p-2 rounded-xl bg-sky-500 text-white">
             Logout
           </button>
