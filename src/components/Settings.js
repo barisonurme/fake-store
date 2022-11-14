@@ -48,7 +48,20 @@ const Settings = () => {
         <div className="w-full flex justify-center">User Settings</div>
         <div className="flex w-full h-px bg-gray-200" />
         <div className="flex flex-col items-start justify-between">
-          <div className="p-4">Username: {user.username}</div>
+          <div className="flex flex-col p-4">
+            <div className="flex">
+              <div className="font-light">Username:&nbsp;</div>
+              <div>{user.username}</div>
+            </div>
+            <div className="flex">
+              <div className="font-light">First Name:&nbsp;</div>
+              <div>{user.name.firstname}</div>
+            </div>
+            <div className="flex">
+              <div className="font-light">Last Name:&nbsp;</div>
+              <div>{user.name.lastname}</div>
+            </div>
+          </div>
           <button className="flex w-full justify-center items-center p-2 rounded-xl bg-sky-500 text-white">
             Logout
           </button>

@@ -24,7 +24,7 @@ const UserLogin = () => {
     dispatch(setCurrentPage("main"));
   };
   return (
-    <div className="w-full flex justify-center flex-col font-montserrat">
+    <div className="w-full flex justify-center items-center flex-col font-montserrat">
       <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4">
         <div
           onClick={() => {
@@ -40,12 +40,18 @@ const UserLogin = () => {
       </div>
       <form
         onSubmit={submitFormHandler}
-        className="flex w-full items-center flex-col p-4"
+        className="flex max-w-5xl w-full items-center flex-col p-4"
       >
         <label>User Name:</label>
-        <Input type={"email"} style={"w-full h-12 border rounded-xl p-4"} />
+        <Input
+          placeHolder="User Name"
+          styles={"w-full h-12 border rounded-xl p-4 grow"}
+        />
         <label>Password:</label>
-        <Input type={"password"} style={"w-full h-12 border rounded-xl p-4"} />
+        <Input
+          placeHolder="Password"
+          styles={"w-full h-12 border rounded-xl p-4 grow"}
+        />
         <div className="w-12 h-12 opacity-0"></div>
         <button
           type="submit"
