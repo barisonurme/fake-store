@@ -47,18 +47,9 @@ function App() {
         </div>
       )}
       <ToastContainer transition={Flip} />
-      <div
-        className={`fixed top-0 flex justify-center ${headerHeight} w-full bg-gray-900 z-10`}
-      >
-        <Header headerHeight={headerHeight} />
-      </div>
-      <div
-        className={`visible lg:hidden fixed bottom-0 flex justify-center ${headerHeight} w-full bg-gray-900`}
-      >
-        <Footer footerHeight={footerHeight} />
-      </div>
+      <Header headerHeight={headerHeight} />
+      <Footer footerHeight={footerHeight} />
       <div className={headerHeight}></div>
-
       <ProductList />
       {currentPage === "cart" && <Cart />}
       {currentPage === "settings" && <Settings />}

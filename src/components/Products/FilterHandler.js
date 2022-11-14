@@ -3,18 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Select from "react-select";
 import { titleCase } from "title-case";
-import { filterStateHandler } from "../../app/slicer";
+import { filterStateHandler, sortHandler } from "../../app/slicer";
 
 const FilterHandler = (props) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const { categories } = props;
+  const dispatch = useDispatch();
+  const products = useSelector((store) => store.uiSlice.products);
+  const currentSortMethod = useSelector((store) => store.uiSlice.currentSortMethod);
 
   useEffect(() => {
     dispatch(filterStateHandler({ selectedOption, products }));
+    dispatch(sortHandler({ selectedOption: { value: currentSortMethod }, products }));
+    // eslint-disable-next-line
   }, [selectedOption]);
-  const products = useSelector((store) => store.uiSlice.products);
-  const dispatch = useDispatch();
-  
+
   useEffect(() => {
     categories.forEach((category) => {
       setOptions((options) => [
@@ -22,6 +25,7 @@ const FilterHandler = (props) => {
         { value: category, label: titleCase(category) },
       ]);
     });
+    // eslint-disable-next-line
   }, [categories]);
 
   const [options, setOptions] = useState([{ value: "All", label: "All" }]);

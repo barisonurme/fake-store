@@ -16,6 +16,7 @@ export const SortHandler = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(sortHandler({ selectedOption, products }));
+    // eslint-disable-next-line
   }, [selectedOption]);
 
   return (

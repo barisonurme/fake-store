@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   products: [],
   filteredProducts: [],
+  currentSortMethod: "",
   currentPage: "main",
   isLoggedIn: false,
   selectedProduct: [],
@@ -153,9 +154,11 @@ const uiSlice = createSlice({
     },
     sortHandler(state, action) {
       if (action.payload.selectedOption === null) return;
-      const { selectedOption, products } = action.payload;
+      const { selectedOption } = action.payload;
       const value = selectedOption.value;
       const productCopy = [...state.filteredProducts];
+      state.currentSortMethod = value;
+
       switch (value) {
         case "Price Low":
           console.log("A-Z");
