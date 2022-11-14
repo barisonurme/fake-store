@@ -13,12 +13,12 @@ const Settings = () => {
 
   return (
     <div className="w-full flex justify-center flex-col font-montserrat">
-      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4">
+      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4  pl-4 pr-4">
         <div
           onClick={() => {
             dispatch(setCurrentPage("main"));
           }}
-          className="w-12 h-12 border rounded-xl flex justify-center items-center ml-2 lg:ml-10 lg:mr-10  bg-white"
+          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10  bg-white"
         >
           <HiChevronLeft size={25} />
         </div>

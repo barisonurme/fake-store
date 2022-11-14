@@ -4,21 +4,20 @@ import Ratings from "../Ratings";
 import FilterHandler from "./FilterHandler";
 import SortHandler from "./SortHandler";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage, setSelectedProduct } from "../../app/slicer";
+import { setCurrentPage, setProducts, setSelectedProduct } from "../../app/slicer";
 import Product from "./Product";
 
 const ProductList = (props) => {
-  const [products, setProducts] = useState([]);
 
   const dispatch = useDispatch();
   const currentPage = useSelector((store) => store.uiSlice.currentPage);
+  const filteredProducts = useSelector((store) => store.uiSlice.filteredProducts);
 
-  // const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const FetchAllData = async () => {
     // Fetch All Products
     const fetchedProducts = await FetchAllProduct();
-    console.log(fetchedProducts);
-    setProducts(fetchedProducts);
+    dispatch(setProducts(fetchedProducts));
 
     // Define categories
     let tempCategories = [];
@@ -26,7 +25,7 @@ const ProductList = (props) => {
       if (!tempCategories.includes(product.category))
         tempCategories.push(product.category);
     });
-    console.log(tempCategories);
+    setCategories(tempCategories);
   };
 
   useEffect(() => {
@@ -37,12 +36,12 @@ const ProductList = (props) => {
     <>
       {currentPage === "main" && (
         <div className="flex flex-col w-full max-w-7xl">
-          <div className="flex w-full max-w-7xl">
-            <FilterHandler />
+          <div className="flex w-full max-w-7xl z-0">
+            <FilterHandler categories={categories} />
             <SortHandler />
           </div>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-8 p-4">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <li
                 onClick={() => {
                   dispatch(setSelectedProduct(product));
@@ -69,7 +68,6 @@ const ProductList = (props) => {
                 <section className="w-full flex flex-col items-start p-4 "></section>
                 <div className="w-full font-bold text-xl pl-4 pr-4 pb-4">
                   ${product.price}
-
                 </div>
               </li>
             ))}

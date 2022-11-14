@@ -18,6 +18,7 @@ import CheckoutSuccess from "./components/CheckoutSuccess";
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     const localCartItems = JSON.parse(localStorage.getItem("cartItems"));
     const cartItemsQuantity = JSON.parse(
@@ -28,7 +29,9 @@ function App() {
     dispatch(
       addLocalCartItems({ localCartItems, cartItemsQuantity, totalCartAmount })
     );
+    // eslint-disable-next-line
   }, []);
+
   const headerHeight = "h-16";
   const footerHeight = "h-14";
 
@@ -45,7 +48,7 @@ function App() {
       )}
       <ToastContainer transition={Flip} />
       <div
-        className={`fixed top-0 flex justify-center ${headerHeight} w-full bg-gray-900`}
+        className={`fixed top-0 flex justify-center ${headerHeight} w-full bg-gray-900 z-10`}
       >
         <Header headerHeight={headerHeight} />
       </div>

@@ -27,14 +27,14 @@ const Product = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4">
+      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4">
         <div
           onClick={() => {
             if (!zoom) {
               disaptch(setCurrentPage("main"));
             } else setZoom(false);
           }}
-          className="w-12 h-12 border rounded-xl flex justify-center items-center ml-2 lg:ml-10 lg:mr-10  bg-white"
+          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10  bg-white"
         >
           <HiChevronLeft size={25} />
         </div>
@@ -43,7 +43,7 @@ const Product = () => {
         </div>
         <div className="w-12 h-12 opacity-0"></div>
       </div>
-      <div className="w-full justify-start max-w-7xl grid grid-flow-col-1 md:grid-cols-2 gap-1 md:gap-8">
+      <div className="p-4 w-full justify-start max-w-7xl grid grid-flow-col-1 md:grid-cols-2 gap-1 md:gap-8">
         {zoom && (
           <div
             onClick={() => setZoom(false)}
@@ -56,7 +56,7 @@ const Product = () => {
             zoom
               ? "bg-white  z-50 fixed w-screen h-[calc(100vh-360px)] top-1/2 left-1/2 cursor-zoom-out -translate-x-1/2 -translate-y-1/2 m-auto inset-x-0 inset-y-0 "
               : "bg-gray-100 z-0 relative cursor-zoom-in max-h-64 md:max-h-[1000px] "
-          }flex mt-1 md:mt-4 justify-center w-full p-4 md:p-14 max-w-5xl border`}
+          } flex mt-1 md:mt-4 justify-center w-full p-4 md:p-14 max-w-5xl border`}
         >
           <img
             alt={selectedProduct.title}
@@ -65,10 +65,10 @@ const Product = () => {
           />
         </section>
         <section className="flex flex-col justify-center items-center w-full p-4 md:p-10">
-          <div className="flex w-full font-semibold text-lg md:text-2xl text-left font-montserrat">
+          <div className="flex w-full font-semibold text-lg lg:text-4xl text-left font-montserrat">
             {selectedProduct.title}
           </div>
-          <div className="flex w-full font-light text-xs md:text-md mt-2 text-left font-montserrat">
+          <div className="flex w-full font-light text-xs lg:text-lg mt-2 text-left font-montserrat">
             {selectedProduct.description}
           </div>
           <div className="flex w-full items-center font-bold text-3xl mt-2 font-montserrat">

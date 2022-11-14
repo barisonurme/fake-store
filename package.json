@@ -13,6 +13,7 @@
     "react-icons": "^4.6.0",
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
+    "react-select": "^5.6.0",
     "react-toastify": "^9.1.1",
     "title-case": "^3.0.3",
     "web-vitals": "^2.1.4"

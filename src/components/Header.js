@@ -24,7 +24,7 @@ export const Header = (props) => {
       </div>
       <div className="flex items-center">
         {currentPage !== "login" && <HeaderUser />}
-        {isLoggedIn && currentPage !== "cart" && (
+        {isLoggedIn && (
           <div className="flex">
             <HeaderCart cartItemsQuantity={cartItemsQuantity} />
           </div>

@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  products: [],
+  filteredProducts: [],
   currentPage: "main",
   isLoggedIn: false,
   selectedProduct: [],
@@ -34,6 +36,10 @@ const uiSlice = createSlice({
   name: "uiSlice",
   initialState,
   reducers: {
+    setProducts(state, action) {
+      state.products = action.payload;
+      state.filteredProducts = action.payload;
+    },
     deleteItemFromCart(state, action) {
       state.cartItems = state.cartItems.filter((item) => {
         return item.id !== action.payload;
@@ -145,10 +151,52 @@ const uiSlice = createSlice({
           break;
       }
     },
+    sortHandler(state, action) {
+      if (action.payload.selectedOption === null) return;
+      const { selectedOption, products } = action.payload;
+      const value = selectedOption.value;
+      const productCopy = [...state.filteredProducts];
+      switch (value) {
+        case "Price Low":
+          console.log("A-Z");
+          productCopy.sort((a, b) => {
+            return a.price - b.price;
+          });
+          break;
+        case "Price High":
+          console.log("Z-A");
+          productCopy.sort((b, a) => {
+            return a.price - b.price;
+          });
+          break;
+        case "Best Rating":
+          console.log("Z-A");
+          productCopy.sort((b, a) => {
+            return a.rating.rate - b.rating.rate;
+          });
+          break;
+        default:
+          break;
+      }
+      state.filteredProducts = productCopy;
+    },
+    filterStateHandler(state, action) {
+      if (action.payload.selectedOption === null) return;
+      const { selectedOption, products } = action.payload;
+      if (action.payload.selectedOption.value === "All") {
+        state.filteredProducts = products;
+        return;
+      }
+      const value = selectedOption.value;
+      state.filteredProducts = products.filter(
+        (product) => product.category === value
+      );
+    },
   },
 });
 
 export const {
+  setProducts,
   setCurrentPage,
   setSelectedProduct,
   addProductToCart,
@@ -157,6 +205,8 @@ export const {
   totalCartAmountCalc,
   darkModeHandler,
   userLoginState,
+  sortHandler,
+  filterStateHandler,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

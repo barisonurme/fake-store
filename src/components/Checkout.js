@@ -19,7 +19,7 @@ const Checkout = () => {
   const [cartNumber, setCartNumber] = useState("**** **** **** ****");
   const [cartExpMonth, setCartExpMonth] = useState("**");
   const [cartExpYear, setCartExpYear] = useState("**");
-  const [cartCVV, setCartCVV] = useState("***");
+  const [cartCVC, setCartCVC] = useState("***");
   const onInputChange = (strokes, placeHolder) => {
     switch (placeHolder) {
       case "Cart Number":
@@ -50,12 +50,12 @@ const Checkout = () => {
         }
         setCartExpYear(strokes);
         break;
-      case "CVV":
+      case "CVC":
         if (strokes.trim() === "") {
-          setCartCVV("***");
+          setCartCVC("***");
           return;
         }
-        setCartCVV(strokes);
+        setCartCVC(strokes);
         break;
       default:
         break;
@@ -79,16 +79,16 @@ const Checkout = () => {
       )}
       {isLoggedIn && (
         <>
-          <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4">
+          <div className="flex flex-row items-center justify-between w-full max-w-7xl mt-1 md:mt-4  pl-4 pr-4">
             <div
               onClick={() => {
                 dispatch(setCurrentPage("cart"));
               }}
-              className="w-12 h-12 border rounded-xl flex justify-center items-center ml-2 lg:ml-10 lg:mr-10  bg-white"
+              className="w-12 h-12 max-w-12 border rounded-xl flex justify-center items-center lg:mr-10  bg-white"
             >
               <HiChevronLeft size={25} />
             </div>
-            <div className="w-full max-w-7xl font-semibold flex text-lg h-12 justify-center items-center p-4">
+            <div className="w-full font-semibold flex text-lg h-12 justify-center items-center p-4">
               <div className="flex">Checkout</div>
             </div>
             <div className="w-12 h-12 opacity-0"></div>
@@ -124,10 +124,10 @@ const Checkout = () => {
                   </div>
                   <div>
                     <div className="text-sky-700 font-semibold tracking-wide text-[10px]">
-                      CVV
+                      CVC
                     </div>
                     <div className="text-white font-semibold tracking-wide text-sm">
-                      {cartCVV}
+                      {cartCVC}
                     </div>
                   </div>
                 </div>
@@ -161,12 +161,12 @@ const Checkout = () => {
                 <Input
                   maxLength={3}
                   onInputChange={onInputChange}
-                  placeHolder="CVV"
+                  placeHolder="CVC"
                   styles={"w-full h-12 border rounded-xl p-4 grow"}
                 />
               </div>
             </div>
-            <div className="flex gap-4 mt-4 mb-4 flex-col items-start justify-start w-full max-w-xl">
+            <div className="flex gap-4 mt-4 mb-4 p-4 md:p-0 flex-col items-start justify-start w-full max-w-xl">
               <div className="flex flex-col w-full">
                 <div>Adress Info</div>
                 <div className="w-full border p-4 rounded-xl text-xs text-gray-700">
@@ -183,7 +183,7 @@ const Checkout = () => {
             </div>
             <button
               onClick={() => dispatch(setCurrentPage("checkoutSuccess"))}
-              className="font-montserrat capitalize fixed md:flex bottom-[70px] md:bottom-auto md:max-w-xl md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
+              className="font-montserrat capitalize fixed md:flex bottom-[70px] md:bottom-auto md:max-w-xl md:relative w-11/12 md:w-full rounded-xl p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
             >
               <div className="flex justify-center items-center text-xl">
                 Finish Order
