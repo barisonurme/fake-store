@@ -48,7 +48,7 @@ const ProductList = (props) => {
                   dispatch(setSelectedProduct(product));
                   dispatch(setCurrentPage("product"));
                 }}
-                className=" overflow-hidden text-left cursor-pointer flex flex-col rounded-sm justify-between border border-gray-200 p-2 shadow-sm"
+                className="overflow-hidden text-left cursor-pointer flex flex-col rounded-sm justify-between border border-b-4 bg-white border-b-yellow-200 border-gray-200 p-2 shadow-sm"
                 key={product.id}
               >
                 <section className="flex items-center  flex-col w-full">

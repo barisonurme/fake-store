@@ -14,6 +14,7 @@ import { addLocalCartItems } from "./app/slicer";
 import Settings from "./components/Settings";
 import UserLogin from "./components/UserLogin";
 import Checkout from "./components/Checkout";
+import CheckoutSuccess from "./components/CheckoutSuccess";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,6 @@ function App() {
       localStorage.getItem("cartItemsQuantity")
     );
     const totalCartAmount = JSON.parse(localStorage.getItem("totalCartAmount"));
-    console.log(localCartItems);
     if (localCartItems === null) return;
     dispatch(
       addLocalCartItems({ localCartItems, cartItemsQuantity, totalCartAmount })
@@ -61,6 +61,7 @@ function App() {
       {currentPage === "settings" && <Settings />}
       {currentPage === "login" && <UserLogin />}
       {currentPage === "checkout" && <Checkout />}
+      {currentPage === "checkoutSuccess" && <CheckoutSuccess />}
       <div className={`${footerHeight} w-full visible lg:hidden `}></div>
     </div>
   );

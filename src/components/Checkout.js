@@ -4,11 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../app/slicer";
 import Input from "./UI/Input";
 
+import { titleCase } from "title-case";
+
 const Checkout = () => {
   const dispatch = useDispatch();
   const slice = useSelector((store) => store.uiSlice);
   const isLoggedIn = slice.isLoggedIn;
   const user = slice.user;
+  const userCity = titleCase(user.address.city);
+  const userStreet = titleCase(user.address.street);
+  // const user = slice.user;
 
   const [cartHolder, setCartHolder] = useState("**** ****");
   const [cartNumber, setCartNumber] = useState("**** **** **** ****");
@@ -31,21 +36,21 @@ const Checkout = () => {
         }
         setCartHolder(strokes);
         break;
-        case "Exp. Month":
-          if (strokes.trim() === "") {
-            setCartExpMonth("**");
-            return;
-          }
-          setCartExpMonth(strokes);
-          break;
-          case "Exp. Year":
+      case "Exp. Month":
+        if (strokes.trim() === "") {
+          setCartExpMonth("**");
+          return;
+        }
+        setCartExpMonth(strokes);
+        break;
+      case "Exp. Year":
         if (strokes.trim() === "") {
           setCartExpYear("**");
           return;
         }
         setCartExpYear(strokes);
         break;
-        case "CVV":
+      case "CVV":
         if (strokes.trim() === "") {
           setCartCVV("***");
           return;
@@ -128,43 +133,64 @@ const Checkout = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full items-center mt-2 gap-4">
+            <div className="flex flex-col w-full items-center mt-2 gap-4 p-4">
               <Input
                 onInputChange={onInputChange}
                 placeHolder="Cart Holder"
                 styles={"w-full max-w-xl h-12 border rounded-xl p-4 "}
               />
               <Input
+                maxLength={16}
                 onInputChange={onInputChange}
                 placeHolder="Cart Number"
                 styles={"w-full max-w-xl h-12 border rounded-xl p-4 "}
               />
               <div className="flex w-full gap-4 max-w-xl">
                 <Input
+                  maxLength={2}
                   onInputChange={onInputChange}
                   placeHolder="Exp. Month"
                   styles={"w-full h-12 border rounded-xl p-4 grow"}
                 />
                 <Input
+                  maxLength={2}
                   onInputChange={onInputChange}
                   placeHolder="Exp. Year"
                   styles={"w-full h-12 border rounded-xl p-4 grow"}
                 />
                 <Input
+                  maxLength={3}
                   onInputChange={onInputChange}
                   placeHolder="CVV"
                   styles={"w-full h-12 border rounded-xl p-4 grow"}
                 />
               </div>
             </div>
-          </div>
-
-          <button className="font-montserrat fixed bottom-[70px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center">
-            <div className="flex justify-center items-center text-xl">
-              Finish Order
-              <HiChevronLeft className="rotate-180" />
+            <div className="flex gap-4 mt-4 mb-4 flex-col items-start justify-start w-full max-w-xl">
+              <div className="flex flex-col w-full">
+                <div>Adress Info</div>
+                <div className="w-full border p-4 rounded-xl text-xs text-gray-700">
+                  {userStreet} Street, No:{user.address.number} , {userCity} ,{" "}
+                  {user.address.zipcode}
+                </div>
+              </div>
+              <div className="flex flex-col w-full">
+                <div>Phone Number</div>
+                <div className="w-full border p-4 rounded-xl text-xs text-gray-700">
+                  {user.phone}
+                </div>
+              </div>
             </div>
-          </button>
+            <button
+              onClick={() => dispatch(setCurrentPage("checkoutSuccess"))}
+              className="font-montserrat capitalize fixed md:flex bottom-[70px] md:bottom-auto md:max-w-xl md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
+            >
+              <div className="flex justify-center items-center text-xl">
+                Finish Order
+                <HiChevronLeft className="rotate-180" />
+              </div>
+            </button>
+          </div>
         </>
       )}
     </>

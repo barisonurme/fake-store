@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "@testing-library/react";
 
 const initialState = {
   currentPage: "main",
@@ -8,7 +7,26 @@ const initialState = {
   cartItems: [],
   cartItemsQuantity: 0,
   totalCartAmount: 0,
-  user: {},
+  user: {
+    email: "",
+    username: "",
+    password: "",
+    name: {
+      firstname: "",
+      lastname: "",
+    },
+    address: {
+      city: "",
+      street: "",
+      number: 3,
+      zipcode: "",
+      geolocation: {
+        lat: "",
+        long: "",
+      },
+    },
+    phone: "",
+  },
   darkMode: false,
 };
 
@@ -113,8 +131,14 @@ const uiSlice = createSlice({
           state.user = user;
           break;
         case "logoutSuccess":
+          localStorage.removeItem("cartItems");
+          localStorage.removeItem("cartItemsQuantity");
+          localStorage.removeItem("totalCartAmount");
           state.isLoggedIn = false;
-          state.user = {};
+          state.user = initialState.user;
+          state.cartItems = [];
+          state.cartItemsQuantity = 0;
+          state.totalCartAmount = 0;
           break;
 
         default:

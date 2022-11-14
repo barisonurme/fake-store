@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useRef, useEffect } from "react";
 
 import {
   deleteItemFromCart,
@@ -8,7 +8,15 @@ import {
 import { HiChevronLeft, HiOutlineX } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 
+import autoAnimate from "@formkit/auto-animate";
+
 const Cart = () => {
+  const parent = useRef(null);
+
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current);
+  }, [parent]);
+
   const slice = useSelector((store) => store.uiSlice);
   const cartItems = slice.cartItems;
   const totalCartAmount = slice.totalCartAmount;
@@ -35,7 +43,7 @@ const Cart = () => {
           Cart is Empty
         </div>
       )}
-      <div className="w-full max-w-7xl flex flex-col p-4">
+      <div ref={parent} className="w-full max-w-7xl flex flex-col p-4">
         {cartItems.map((product) => (
           <ul
             key={product.id}
@@ -65,16 +73,19 @@ const Cart = () => {
         ))}
       </div>
       {totalCartAmount > 0 && (
-        <button
-          onClick={() => dispatch(setCurrentPage("checkout"))}
-          className="font-montserrat fixed bottom-[70px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
-        >
-          <div className="text-xs">Total Amount: {totalCartAmount}</div>
-          <div className="flex justify-center items-center text-2xl">
-            Checkout
-            <HiChevronLeft className="rotate-180" />
-          </div>
-        </button>
+        <>
+          <button
+            onClick={() => dispatch(setCurrentPage("checkout"))}
+            className="font-montserrat fixed bottom-[70px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
+          >
+            <div className="text-xs">Total Amount: {totalCartAmount}</div>
+            <div className="flex justify-center items-center text-2xl">
+              Checkout
+              <HiChevronLeft className="rotate-180" />
+            </div>
+          </button>
+          <div className={`h-[70px] w-full visible lg:hidden `}></div>
+        </>
       )}
     </>
   );

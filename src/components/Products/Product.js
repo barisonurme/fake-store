@@ -95,7 +95,7 @@ const Product = () => {
               disaptch(setCurrentPage("main"));
               toast.success("Product Added to Cart", {
                 position: "top-center",
-                autoClose: 2000,
+                autoClose: 500,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: false,
