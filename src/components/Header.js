@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 export const Header = (props) => {
   const { headerHeight } = props;
   const selector = useSelector((store) => store.uiSlice);
+  const currentPage = selector.currentPage;
+  const isLoggedIn = selector.isLoggedIn;
   return (
     <div
       className={`flex fixed top-0 justify-between max-w-7xl w-full ${headerHeight} bg-gray-900 items-center p-4 text-white`}
@@ -14,11 +16,12 @@ export const Header = (props) => {
         fakestore
       </div>
       <div className="flex items-center">
-        {!selector.isLoggedIn && <HeaderUser />}
-        <div className="hidden md:relative">
-          <div className="h-8 mr-2 ml-2 w-px bg-gray-500"></div>
-          <HeaderCart />
-        </div>
+        {!isLoggedIn && currentPage !== "login" && <HeaderUser />}
+        {isLoggedIn && (
+          <div className="flex">
+            <HeaderCart />
+          </div>
+        )}
       </div>
     </div>
   );

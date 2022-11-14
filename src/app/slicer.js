@@ -8,6 +8,7 @@ const initialState = {
   cartItems: [],
   cartItemsQuantity: 0,
   totalCartAmount: 0,
+  username: "",
   darkMode: false,
 };
 
@@ -104,6 +105,22 @@ const uiSlice = createSlice({
     darkModeHandler(state, action) {
       state.darkMode = action.payload;
     },
+    userLoginState(state, action) {
+      const { status, username } = action.payload;
+      switch (status) {
+        case "loginSuccess":
+          state.isLoggedIn = true;
+          state.username = username;
+          break;
+        case "logoutSuccess":
+          state.isLoggedIn = false;
+          state.username = "";
+          break;
+
+        default:
+          break;
+      }
+    },
   },
 });
 
@@ -115,6 +132,7 @@ export const {
   deleteItemFromCart,
   totalCartAmountCalc,
   darkModeHandler,
+  userLoginState,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;
