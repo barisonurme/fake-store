@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Flip } from "react-toastify";
 import { GoToCart } from "./components/Cart/GoToCart";
 import { addLocalCartItems } from "./app/slicer";
+import Settings from "./components/Settings";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App() {
 
       <ProductList />
       {currentPage === "cart" && <Cart />}
+      {currentPage === "settings" && <Settings />}
       <div className={`${footerHeight} w-full visible lg:hidden `}></div>
     </div>
   );

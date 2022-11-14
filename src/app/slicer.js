@@ -8,6 +8,7 @@ const initialState = {
   cartItems: [],
   cartItemsQuantity: 0,
   totalCartAmount: 0,
+  darkMode: false,
 };
 
 const uiSlice = createSlice({
@@ -100,6 +101,9 @@ const uiSlice = createSlice({
         JSON.stringify(state.totalCartAmount)
       );
     },
+    darkModeHandler(state, action) {
+      state.darkMode = action.payload;
+    },
   },
 });
 
@@ -110,6 +114,7 @@ export const {
   addLocalCartItems,
   deleteItemFromCart,
   totalCartAmountCalc,
+  darkModeHandler,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

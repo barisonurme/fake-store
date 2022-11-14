@@ -44,6 +44,7 @@ const Footer = (props) => {
 
       {/* Cart */}
       <div
+        onClick={() => dispatch(setCurrentPage("settings"))}
         className={`${footerHeight} w-12 flex flex-col items-center justify-evenly hover:text-sky-500 duration-500 ${
           currentPage === "settings" && "text-sky-500"
         }`}
