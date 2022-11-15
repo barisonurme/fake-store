@@ -228,6 +228,8 @@ const Checkout = () => {
               </div>
             </button>
           </div>
+      <div className={`h-32 w-full visible lg:hidden `}></div>
+
         </>
       )}
     </>
