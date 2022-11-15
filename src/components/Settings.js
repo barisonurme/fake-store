@@ -18,7 +18,7 @@ const Settings = () => {
           onClick={() => {
             dispatch(setCurrentPage("main"));
           }}
-          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10  bg-white"
+          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white  dark:bg-slate-700 dark:border-slate-500"
         >
           <HiChevronLeft size={25} />
         </div>
