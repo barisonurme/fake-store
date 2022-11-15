@@ -37,7 +37,6 @@ const ProductList = (props) => {
   };
 
   useEffect(() => {
-
     // TODO: Trying solution for infinite scroll work.
     if (document.body.clientHeight <= window.innerHeight) {
       setLimit(20);
@@ -118,10 +117,9 @@ const ProductList = (props) => {
       {currentPage === "product" && <Product />}
       {firstLoading && hasMore && currentPage === "main" && (
         <>
-          <div className="fixed bg-sky-500 z-50 bottom-10 p-4 text-white">
+          <div className="fixed bg-sky-500 z-50 bottom-16 rounded-xl p-4 text-white">
             Scroll to Load more Product
           </div>
-          <div className="h-[3500px]"></div>
         </>
       )}
     </>

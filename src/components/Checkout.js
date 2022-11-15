@@ -22,7 +22,6 @@ const Checkout = () => {
   const [cartExpYear, setCartExpYear] = useState("**");
   const [cartCVC, setCartCVC] = useState("***");
   const onInputChange = (strokes, placeHolder) => {
-    console.log(cartHolder.includes("*"));
     switch (placeHolder) {
       case "Cart Number":
         if (strokes.trim() === "") {
@@ -137,6 +136,7 @@ const Checkout = () => {
             </div>
             <div className="flex flex-col w-full items-center mt-2 gap-4 p-4">
               <Input
+                type={"text"}
                 onInputChange={onInputChange}
                 placeHolder="Cart Holder"
                 styles={
@@ -144,6 +144,7 @@ const Checkout = () => {
                 }
               />
               <Input
+                type={"number"}
                 maxLength={16}
                 onInputChange={onInputChange}
                 placeHolder="Cart Number"
@@ -153,6 +154,7 @@ const Checkout = () => {
               />
               <div className="flex w-full gap-4 max-w-xl">
                 <Input
+                  type={"number"}
                   maxLength={2}
                   onInputChange={onInputChange}
                   placeHolder="Exp. Month"
@@ -161,6 +163,7 @@ const Checkout = () => {
                   }
                 />
                 <Input
+                  type={"number"}
                   maxLength={2}
                   onInputChange={onInputChange}
                   placeHolder="Exp. Year"
@@ -169,6 +172,7 @@ const Checkout = () => {
                   }
                 />
                 <Input
+                  type={"number"}
                   maxLength={3}
                   onInputChange={onInputChange}
                   placeHolder="CVC"
