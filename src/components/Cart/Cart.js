@@ -24,12 +24,12 @@ const Cart = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4">
+      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4 dark:text-slate-300">
         <div
           onClick={() => {
             dispatch(setCurrentPage("main"));
           }}
-          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white"
+          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white  dark:bg-slate-700 dark:border-slate-500"
         >
           <HiChevronLeft size={25} />
         </div>
@@ -47,7 +47,7 @@ const Cart = () => {
         {cartItems.map((product) => (
           <ul
             key={product.id}
-            className="flex justify-center items-center w-full border p-1 mb-2"
+            className="flex justify-center items-center w-full border dark:border-slate-700 dark:text-slate-300 p-1 mb-2"
           >
             <div className="flex justify-center w-12 h-12 m-4">
               <img alt={product.title} src={product.image} className="object-contain h-12" />

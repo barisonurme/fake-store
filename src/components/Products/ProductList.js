@@ -35,7 +35,7 @@ const ProductList = (props) => {
   return (
     <>
       {currentPage === "main" && (
-        <div className="flex flex-col w-full max-w-7xl">
+        <div className="flex flex-col w-full max-w-7xl dark:text-slate-300">
           <div className="flex w-full max-w-7xl z-0">
             <FilterHandler categories={categories} />
             <SortHandler />
@@ -47,7 +47,7 @@ const ProductList = (props) => {
                   dispatch(setSelectedProduct(product));
                   dispatch(setCurrentPage("product"));
                 }}
-                className="overflow-hidden text-left cursor-pointer flex flex-col rounded-sm justify-between border border-b-4 bg-white border-b-yellow-200 border-gray-200 p-2 shadow-sm"
+                className="overflow-hidden text-left cursor-pointer flex flex-col rounded-sm justify-between border border-b-4 bg-white dark:bg-slate-800 border-gray-200 dark:border-gray-700 dark:border-b-yellow-500 border-b-yellow-200 p-2 shadow-sm"
                 key={product.id}
               >
                 <section className="flex items-center  flex-col w-full">
@@ -58,7 +58,7 @@ const ProductList = (props) => {
                       src={product.image}
                     />
                   </div>
-                  <div className="flex justify-start w-full font-bold text-sm text-gray-700 p-4 max-h-10 overflow-hidden">
+                  <div className="flex justify-start w-full font-bold text-sm text-gray-700 dark:text-slate-300 p-4 max-h-10 overflow-hidden">
                     {product.title}
                   </div>
                   <div className="w-full pl-4">

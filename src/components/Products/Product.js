@@ -27,14 +27,14 @@ const Product = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4">
+      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4 dark:text-slate-300">
         <div
           onClick={() => {
             if (!zoom) {
               disaptch(setCurrentPage("main"));
             } else setZoom(false);
           }}
-          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10  bg-white"
+          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white  dark:bg-slate-700 dark:border-slate-500"
         >
           <HiChevronLeft size={25} />
         </div>
@@ -43,7 +43,7 @@ const Product = () => {
         </div>
         <div className="w-12 h-12 opacity-0"></div>
       </div>
-      <div className="p-4 w-full justify-start max-w-7xl grid grid-flow-col-1 md:grid-cols-2 gap-1 md:gap-8">
+      <div className="p-4 w-full justify-start max-w-7xl grid grid-flow-col-1 md:grid-cols-2 gap-1 md:gap-8  dark:text-slate-300">
         {zoom && (
           <div
             onClick={() => setZoom(false)}

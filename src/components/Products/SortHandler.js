@@ -12,12 +12,46 @@ const options = [
 
 export const SortHandler = () => {
   const [selectedOption, setSelectedOption] = useState(null);
-  const products = useSelector((store) => store.uiSlice.products);
+  const slice = useSelector((store) => store.uiSlice);
+  const products = slice.products;
+  const darkMode = slice.darkMode;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(sortHandler({ selectedOption, products }));
     // eslint-disable-next-line
   }, [selectedOption]);
+
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: darkMode ? "#0f172a" : "#cbd5e1",
+      text: darkMode ? "white" : "black",
+      // match with the menu
+      borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
+      // Overwrittes the different states of border
+      borderColor: "#334155",
+      // Removes weird border around container
+      boxShadow: state.isFocused ? null : null,
+      "&:hover": {
+        // Overwrittes the different states of border
+        borderColor: "#0ea5e9",
+      },
+    }),
+    menu: (base) => ({
+      ...base,
+      // override border radius to match the box
+      borderRadius: 0,
+      // kill the gap
+      marginTop: 0,
+    }),
+    menuList: (base) => ({
+      ...base,
+      // kill the white space on first and last option
+      padding: 0,
+    }),
+   
+  };
+
 
   return (
     <div className="w-48 flex font-montserrat justify-end text-right pr-8 mt-4">
@@ -26,6 +60,7 @@ export const SortHandler = () => {
         placeholder={"Sort"}
         className="flex gap-3"
         options={options}
+        styles={customStyles}
       />
     </div>
   );

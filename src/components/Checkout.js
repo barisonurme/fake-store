@@ -79,12 +79,12 @@ const Checkout = () => {
       )}
       {isLoggedIn && (
         <>
-          <div className="flex flex-row items-center justify-between w-full max-w-7xl mt-1 md:mt-4  pl-4 pr-4">
+          <div className="flex flex-row items-center justify-between w-full max-w-7xl mt-1 md:mt-4 dark:text-slate-300 pl-4 pr-4">
             <div
               onClick={() => {
                 dispatch(setCurrentPage("cart"));
               }}
-              className="w-12 h-12 max-w-12 border rounded-xl flex justify-center items-center lg:mr-10  bg-white"
+              className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white  dark:bg-slate-700 dark:border-slate-500"
             >
               <HiChevronLeft size={25} />
             </div>
@@ -137,46 +137,46 @@ const Checkout = () => {
               <Input
                 onInputChange={onInputChange}
                 placeHolder="Cart Holder"
-                styles={"w-full max-w-xl h-12 border rounded-xl p-4 "}
+                styles={"w-full max-w-xl h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300"}
               />
               <Input
                 maxLength={16}
                 onInputChange={onInputChange}
                 placeHolder="Cart Number"
-                styles={"w-full max-w-xl h-12 border rounded-xl p-4 "}
+                styles={"w-full max-w-xl h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300"}
               />
               <div className="flex w-full gap-4 max-w-xl">
                 <Input
                   maxLength={2}
                   onInputChange={onInputChange}
                   placeHolder="Exp. Month"
-                  styles={"w-full h-12 border rounded-xl p-4 grow"}
+                  styles={"w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"}
                 />
                 <Input
                   maxLength={2}
                   onInputChange={onInputChange}
                   placeHolder="Exp. Year"
-                  styles={"w-full h-12 border rounded-xl p-4 grow"}
+                  styles={"w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"}
                 />
                 <Input
                   maxLength={3}
                   onInputChange={onInputChange}
                   placeHolder="CVC"
-                  styles={"w-full h-12 border rounded-xl p-4 grow"}
+                  styles={"w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"}
                 />
               </div>
             </div>
-            <div className="flex gap-4 mt-4 mb-4 p-4 md:p-0 flex-col items-start justify-start w-full max-w-xl">
+            <div className="flex gap-4 mt-4 mb-4 p-4 md:p-0 flex-col items-start justify-start w-full max-w-xl  dark:text-slate-300">
               <div className="flex flex-col w-full">
                 <div>Adress Info</div>
-                <div className="w-full border p-4 rounded-xl text-xs text-gray-700">
+                <div className="w-full border p-4 rounded-xl text-xs text-gray-700  dark:text-slate-400 tracking-wider">
                   {userStreet} Street, No:{user.address.number} , {userCity} ,{" "}
                   {user.address.zipcode}
                 </div>
               </div>
               <div className="flex flex-col w-full">
                 <div>Phone Number</div>
-                <div className="w-full border p-4 rounded-xl text-xs text-gray-700">
+                <div className="w-full border p-4 rounded-xl text-xs text-gray-700  dark:text-slate-400 tracking-wider">
                   {user.phone}
                 </div>
               </div>

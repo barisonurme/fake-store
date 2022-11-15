@@ -129,6 +129,15 @@ const uiSlice = createSlice({
     },
     darkModeHandler(state, action) {
       state.darkMode = action.payload;
+      if (state.darkMode) {
+        document.getElementById("root").classList.add("dark");
+        document.body.style.backgroundColor = "#1e293b";
+        localStorage.setItem("darkMode", true);
+      } else {
+        document.getElementById("root").classList.remove("dark");
+        document.body.style.backgroundColor = "white";
+        localStorage.setItem("darkMode", false);
+      }
     },
     userLoginState(state, action) {
       const { status, user } = action.payload;

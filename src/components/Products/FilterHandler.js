@@ -9,12 +9,16 @@ const FilterHandler = (props) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const { categories } = props;
   const dispatch = useDispatch();
-  const products = useSelector((store) => store.uiSlice.products);
-  const currentSortMethod = useSelector((store) => store.uiSlice.currentSortMethod);
+  const slice = useSelector((store) => store.uiSlice);
+  const products = slice.products;
+  const currentSortMethod = slice.currentSortMethod;
+  const darkMode = slice.darkMode;
 
   useEffect(() => {
     dispatch(filterStateHandler({ selectedOption, products }));
-    dispatch(sortHandler({ selectedOption: { value: currentSortMethod }, products }));
+    dispatch(
+      sortHandler({ selectedOption: { value: currentSortMethod }, products })
+    );
     // eslint-disable-next-line
   }, [selectedOption]);
 
@@ -30,6 +34,36 @@ const FilterHandler = (props) => {
 
   const [options, setOptions] = useState([{ value: "All", label: "All" }]);
 
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: darkMode ? "#0f172a" : "#cbd5e1",
+      text: darkMode ? "white" : "black",
+      // match with the menu
+      borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
+      // Overwrittes the different states of border
+      borderColor: "#334155",
+      // Removes weird border around container
+      boxShadow: state.isFocused ? null : null,
+      "&:hover": {
+        // Overwrittes the different states of border
+        borderColor: "#0ea5e9",
+      },
+    }),
+    menu: (base) => ({
+      ...base,
+      // override border radius to match the box
+      borderRadius: 0,
+      // kill the gap
+      marginTop: 0,
+    }),
+    menuList: (base) => ({
+      ...base,
+      // kill the white space on first and last option
+      padding: 0,
+    }),
+  };
+
   return (
     <div className="font-montserrat flex flex-row w-full items-center pl-8 mt-4">
       <Select
@@ -38,6 +72,7 @@ const FilterHandler = (props) => {
         isSearchable={false}
         placeholder={"Categories"}
         options={options}
+        styles={customStyles}
       />
     </div>
   );

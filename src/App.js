@@ -40,7 +40,7 @@ function App() {
   const cartItemsQuantity = slice.cartItemsQuantity;
 
   return (
-    <div className="flex flex-col justify-center items-center w-full">
+    <div className="flex flex-col max-h-max justify-start items-center w-full">
       {currentPage === "main" && (
         <div className="z-50">
           <GoToCart cartItemsQuantity={cartItemsQuantity} />

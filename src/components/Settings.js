@@ -12,8 +12,8 @@ const Settings = () => {
   const isLoggedIn = slice.isLoggedIn;
 
   return (
-    <div className="w-full flex justify-center flex-col font-montserrat">
-      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4  pl-4 pr-4">
+    <div className="w-full  max-w-7xl  flex justify-center flex-col font-montserrat dark:text-slate-300">
+      <div className="flex flex-row justify-between w-fullmt-1 md:mt-4  pl-4 pr-4">
         <div
           onClick={() => {
             dispatch(setCurrentPage("main"));
