@@ -1,4 +1,4 @@
-import React , { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 
 import {
   deleteItemFromCart,
@@ -47,10 +47,14 @@ const Cart = () => {
         {cartItems.map((product) => (
           <ul
             key={product.id}
-            className="flex justify-center items-center w-full border dark:border-slate-700 dark:text-slate-300 p-1 mb-2"
+            className="flex justify-between items-center w-full border dark:border-slate-700 dark:text-slate-300 p-1 mb-2"
           >
-            <div className="flex justify-center w-12 h-12 m-4">
-              <img alt={product.title} src={product.image} className="object-contain h-12" />
+            <div className="flex grow-1 justify-center w-12 h-12 m-4">
+              <img
+                alt={product.title}
+                src={product.image}
+                className="object-contain h-12"
+              />
             </div>
             <div className="flex flex-col grow flex-wrap">
               <div className="font-montserrat font-medium">{product.title}</div>
@@ -61,14 +65,16 @@ const Cart = () => {
                 ${product.price}
               </div>
             </div>
-            <HiOutlineX
-              onClick={() => {
-                dispatch(deleteItemFromCart(product.id));
-                dispatch(totalCartAmountCalc());
-              }}
-              size={15}
-              className="mr-4"
-            />
+            <div className="max-w-12">
+              <HiOutlineX
+                onClick={() => {
+                  dispatch(deleteItemFromCart(product.id));
+                  dispatch(totalCartAmountCalc());
+                }}
+                size={15}
+                className="mr-4"
+              />
+            </div>
           </ul>
         ))}
       </div>
