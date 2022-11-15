@@ -4,6 +4,12 @@ export const FetchAllProduct = async () => {
   return products;
 };
 
+export const FetchLimitedProduct = async (limit) => {
+  const response = await fetch(`https://fakestoreapi.com/products?limit=${limit}`);
+  const products = await response.json();
+  return products;
+};
+
 export const UserLoginHandler = async (username, password) => {
   return DUMMY_USER;
   // Timeout Error while loading 524 
