@@ -23,6 +23,8 @@ const FilterHandler = (props) => {
   }, [selectedOption]);
 
   useEffect(() => {
+    setOptions([{ value: "All", label: "All" }]);
+    console.log(categories);
     categories.forEach((category) => {
       setOptions((options) => [
         ...options,

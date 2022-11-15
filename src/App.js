@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Flip } from "react-toastify";
 import { GoToCart } from "./components/Cart/GoToCart";
-import { addLocalCartItems } from "./app/slicer";
+import { addLocalCartItems, darkModeHandler } from "./app/slicer";
 import Settings from "./components/Settings";
 import UserLogin from "./components/UserLogin";
 import Checkout from "./components/Checkout";
@@ -29,6 +29,9 @@ function App() {
     dispatch(
       addLocalCartItems({ localCartItems, cartItemsQuantity, totalCartAmount })
     );
+    const darkMode = localStorage.getItem("darkMode");
+    console.log(darkMode)
+    if (darkMode) dispatch(darkModeHandler());
     // eslint-disable-next-line
   }, []);
 
