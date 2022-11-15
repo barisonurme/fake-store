@@ -170,19 +170,16 @@ const uiSlice = createSlice({
 
       switch (value) {
         case "Price Low":
-          console.log("A-Z");
           productCopy.sort((a, b) => {
             return a.price - b.price;
           });
           break;
         case "Price High":
-          console.log("Z-A");
           productCopy.sort((b, a) => {
             return a.price - b.price;
           });
           break;
         case "Best Rating":
-          console.log("Z-A");
           productCopy.sort((b, a) => {
             return a.rating.rate - b.rating.rate;
           });

@@ -23,7 +23,7 @@ const ProductList = (props) => {
   const [limit, setLimit] = useState(10);
 
   const FetchDataStart = async (limit) => {
-    // Fetch All Products
+    // Fetch Limited Products
     const fetchedProducts = await FetchLimitedProduct(limit);
     dispatch(setProducts(fetchedProducts));
 
@@ -37,20 +37,20 @@ const ProductList = (props) => {
   };
 
   useEffect(() => {
+
+    // TODO: Trying solution for infinite scroll work.
     if (document.body.clientHeight <= window.innerHeight) {
-      console.log("no scroll");
       setLimit(20);
     }
+
     FetchDataStart(limit);
     setLimit((limit) => limit + 10);
     // eslint-disable-next-line
   }, []);
 
   const fetchData = async () => {
-    console.log("next?");
-    console.log("limit", limit);
     const fetchedProducts = await FetchLimitedProduct(limit);
-    console.log(fetchedProducts);
+
     // Define categories
     let tempCategories = [];
     fetchedProducts.forEach((product) => {
