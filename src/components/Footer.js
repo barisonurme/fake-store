@@ -17,7 +17,7 @@ const Footer = (props) => {
 
   return (
     <div
-      className={`visible lg:hidden fixed bottom-0 flex justify-center ${footerHeight} w-full bg-gray-900`}
+      className={`visible lg:hidden fixed bottom-0 flex justify-center ${footerHeight} w-full bg-gray-900 z-10`}
     >
       <div
         className={`xl:invisible visible flex max-w-2xl justify-between pl-8 pr-8 items-start fixed w-full bottom-0 ${footerHeight} bg-gray-900 text-white`}
