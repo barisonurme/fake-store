@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HiChevronLeft } from "react-icons/hi";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { UserLoginHandler } from "../app/FetchData";
 import { setCurrentPage, userLoginState } from "../app/slicer";
 import Input from "./UI/Input";
@@ -8,11 +9,25 @@ import Loading from "./UI/Loading";
 
 const UserLogin = () => {
   const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
   const submitFormHandler = async (e) => {
     e.preventDefault();
-
+    if (username.trim() === "" || password.trim() === "" ) {
+      toast.error("Fields can't be empty", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
     setLoading(true);
     const response = await UserLoginHandler({
       username: "johnd",
@@ -23,6 +38,7 @@ const UserLogin = () => {
     dispatch(userLoginState({ status: "loginSuccess", user: response }));
     dispatch(setCurrentPage("main"));
   };
+
   return (
     <>
       <div className="font-montserrat flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4">
@@ -44,11 +60,13 @@ const UserLogin = () => {
       >
         <label>User Name:</label>
         <Input
+          onInputChange={setUsername}
           placeHolder="User Name"
           styles={"w-full h-12 border rounded-xl p-4 grow"}
         />
         <label>Password:</label>
         <Input
+          onInputChange={setPassword}
           placeHolder="Password"
           styles={"w-full h-12 border rounded-xl p-4 grow"}
         />

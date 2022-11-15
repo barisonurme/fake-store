@@ -5,6 +5,7 @@ import { setCurrentPage } from "../app/slicer";
 import Input from "./UI/Input";
 
 import { titleCase } from "title-case";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Checkout = () => {
   const [cartExpYear, setCartExpYear] = useState("**");
   const [cartCVC, setCartCVC] = useState("***");
   const onInputChange = (strokes, placeHolder) => {
+    console.log(cartHolder.includes("*"));
     switch (placeHolder) {
       case "Cart Number":
         if (strokes.trim() === "") {
@@ -137,32 +139,42 @@ const Checkout = () => {
               <Input
                 onInputChange={onInputChange}
                 placeHolder="Cart Holder"
-                styles={"w-full max-w-xl h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300"}
+                styles={
+                  "w-full max-w-xl h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300"
+                }
               />
               <Input
                 maxLength={16}
                 onInputChange={onInputChange}
                 placeHolder="Cart Number"
-                styles={"w-full max-w-xl h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300"}
+                styles={
+                  "w-full max-w-xl h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300"
+                }
               />
               <div className="flex w-full gap-4 max-w-xl">
                 <Input
                   maxLength={2}
                   onInputChange={onInputChange}
                   placeHolder="Exp. Month"
-                  styles={"w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"}
+                  styles={
+                    "w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"
+                  }
                 />
                 <Input
                   maxLength={2}
                   onInputChange={onInputChange}
                   placeHolder="Exp. Year"
-                  styles={"w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"}
+                  styles={
+                    "w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"
+                  }
                 />
                 <Input
                   maxLength={3}
                   onInputChange={onInputChange}
                   placeHolder="CVC"
-                  styles={"w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"}
+                  styles={
+                    "w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"
+                  }
                 />
               </div>
             </div>
@@ -182,7 +194,28 @@ const Checkout = () => {
               </div>
             </div>
             <button
-              onClick={() => dispatch(setCurrentPage("checkoutSuccess"))}
+              onClick={() => {
+                if (
+                  cartHolder.includes("*") ||
+                  cartNumber.includes("*") ||
+                  cartExpMonth.includes("*") ||
+                  cartExpYear.includes("*") ||
+                  cartCVC.includes("*")
+                ) {
+                  toast.error("Fields can't be empty", {
+                    position: "top-center",
+                    autoClose: 500,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                  });
+                  return;
+                }
+                dispatch(setCurrentPage("checkoutSuccess"));
+              }}
               className="font-montserrat capitalize fixed md:flex bottom-[70px] md:bottom-auto md:max-w-xl md:relative w-11/12 md:w-full rounded-xl p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
             >
               <div className="flex justify-center items-center text-xl">
