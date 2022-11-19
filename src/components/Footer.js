@@ -1,8 +1,8 @@
 import React from "react";
 
 import {
-  HiOutlineHome,
-  HiOutlineShoppingCart,
+  HiHome,
+  HiShoppingCart,
   HiOutlineMenu,
 } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
@@ -29,7 +29,7 @@ const Footer = (props) => {
             currentPage === "main" && "text-sky-500"
           }`}
         >
-          <HiOutlineHome size={25} />
+          <HiHome size={25} />
         </div>
 
         {/* Cart */}
@@ -39,8 +39,8 @@ const Footer = (props) => {
             currentPage === "cart" && "text-sky-500"
           }`}
         >
-          <HiOutlineShoppingCart size={25} />
-          <div className="absolute flex font-bold font-montserrat w-4 h-4 bg-white text-sky-500 justify-center align-middle items-center text-xs translate-x-3 -translate-y-3 rounded-full">
+          <HiShoppingCart size={25} />
+          <div className="absolute flex font-bold w-4 h-4 bg-white text-sky-500 justify-center align-middle items-center text-xs translate-x-3 -translate-y-3 rounded-full">
             {cartItemsQuantity}
           </div>
         </div>

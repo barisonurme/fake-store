@@ -16,12 +16,12 @@ export const HeaderUser = () => {
         if(!isLoggedIn) dispatch(setCurrentPage("login"))
         else  dispatch(setCurrentPage("settings"))
       }}
-      className="font-montserrat flex items-center justify-center hover:bg-gray-600 border border-gray-800 hover:border-gray-900 p-1  pl-4 pr-4  rounded-xl duration-500"
+      className="flex items-center justify-center hover:bg-gray-600 border border-gray-800 hover:border-gray-900 p-1  pl-4 pr-4  rounded-xl duration-500"
     >
       <AiOutlineUser size={20} className="text-sky-500" />
       <div className="flex flex-col text-left items-start pr-2">
-        <div className="flex text-xs translate-x-1 translate-y-1">Hello,</div>
-        <div className="flex ml-1 cursor-pointer ">
+        <div className="flex text-[10px] translate-x-1 translate-y-1">Hello,</div>
+        <div className="flex ml-1 cursor-pointer text-sm">
           {!isLoggedIn && "Login Here"}
           {isLoggedIn && `${user.name.firstname}`}
         </div>

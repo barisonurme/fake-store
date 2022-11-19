@@ -11,12 +11,12 @@ export const HeaderCart = (props) => {
   return (
     <div
       onClick={() => dispatch(setCurrentPage("cart"))}
-      className="hidden font-montserrat md:flex items-center justify-center hover:bg-gray-600  border border-gray-800 hover:border-gray-900 p-1  pl-4 pr-4 rounded-xl duration-500"
+      className="hidden md:flex items-center justify-center hover:bg-gray-600  border border-gray-800 hover:border-gray-900 p-1  pl-4 pr-4 rounded-xl duration-500"
     >
       <HiOutlineShoppingCart size={20} className="text-sky-500" />
       <div className="flex flex-col start text-left items-start justify-start ">
-        <div className="flex text-xs translate-x-1 translate-y-1">Shopping</div>
-        <div className="flex ml-1 cursor-pointer">
+        <div className="flex text-[10px] translate-x-1 translate-y-1">Shopping</div>
+        <div className="flex ml-1 cursor-pointer text-sm">
           Cart {`(${cartItemsQuantity})`}
         </div>
       </div>

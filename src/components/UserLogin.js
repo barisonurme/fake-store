@@ -1,84 +1,127 @@
 import React, { useState } from "react";
-import { HiChevronLeft } from "react-icons/hi";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { UserLoginHandler } from "../app/FetchData";
-import { setCurrentPage, userLoginState } from "../app/slicer";
-import Input from "./UI/Input";
 import Loading from "./UI/Loading";
 
-const UserLogin = () => {
+import useInput from "../hooks/use-input";
+import { UserLoginHandler } from "../app/FetchData";
+import { setCurrentPage, toasterHandler, userLoginState } from "../app/slicer";
+
+const UserLogin = (props) => {
+  const {
+    value: enteredUserName,
+    hasError: userNameInputHasError,
+    isValid: userNameInputIsValid,
+    valueChangeHandler: userNameChangeHandler,
+    inputBlurHandler: userNameInputBlurHandler,
+    focusHandler: userNameOnFocusHandler,
+    isFocused: userNameIsFocused,
+    isEmpty: isUserNameInputEmpty,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredPassword,
+    hasError: passwordInputHasError,
+    isValid: passwordInputIsValid,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordInputBlurHandler,
+    focusHandler: passwordFocusHandler,
+    isFocused: passwordIsFocused,
+    isEmpty: isPasswordInputEmpty,
+  } = useInput((value) => value !== "");
+
   const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+
+  let formIsValid = false;
+  if (passwordInputIsValid && userNameInputIsValid) {
+    formIsValid = true;
+  }
 
   const submitFormHandler = async (e) => {
     e.preventDefault();
-    if (username.trim() === "" || password.trim() === "") {
-      toast.error("Fields can't be empty", {
-        position: "top-center",
-        autoClose: 500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+    if (loading) return;
+    if (!formIsValid) {
+      dispatch(
+        toasterHandler({
+          status: true,
+          msg: "Fields can't be empty.",
+          success: false,
+        })
+      );
       return;
     }
     setLoading(true);
-    const response = await UserLoginHandler({
-      username: "johnd",
-      password: "m38rmF",
-    });
-    if (loading) return;
-    setLoading(false);
-    dispatch(userLoginState({ status: "loginSuccess", user: response }));
+    const user = await UserLoginHandler(enteredUserName, enteredPassword);
+    dispatch(userLoginState({ status: "loginSuccess", user }));
     dispatch(setCurrentPage("main"));
+    dispatch(
+      toasterHandler({
+        status: true,
+        msg: `Welcom, ${user.name.firstname}`,
+        success: true,
+      })
+    );
   };
 
   return (
-    <>
-      <div className="font-montserrat flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4 dark:text-slate-300">
-        <div
-          onClick={() => {
-            dispatch(setCurrentPage("main"));
-          }}
-          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white  dark:bg-slate-700 dark:border-slate-500"
-        >
-          <HiChevronLeft size={25} />
-        </div>
-        <div className="w-full max-w-7xl font-semibold flex text-lg h-12 justify-center items-center p-4">
-          <div className="flex">Login Page</div>
-        </div>
-      </div>
+    <div className="flex w-full p-4 h-[calc(100vh-360px)] justify-center items-center">
       <form
         onSubmit={submitFormHandler}
-        className="flex max-w-5xl w-full items-center flex-col p-4 justify-center font-montserrat dark:text-slate-300"
+        className="flex m-auto max-w-2xl gap-5 rounded-md w-full bg-slate-50 dark:bg-transparent dark:border-transparent dark:shadow-none border shadow-md shadow-slate-500/10 items-center flex-col p-4 justify-center dark:text-slate-300"
       >
-        <label>User Name:</label>
-        <Input
-          onInputChange={setUsername}
-          placeHolder="User Name"
-          styles={"w-full h-12 border rounded-xl p-4 grow"}
-        />
-        <label>Password:</label>
-        <Input
-          onInputChange={setPassword}
-          placeHolder="Password"
-          styles={"w-full h-12 border rounded-xl p-4 grow"}
-        />
-        <div className="w-12 h-12 opacity-0"></div>
+        <div className="flex flex-col w-full justify-center items-center">
+          <label
+            className={`translate-y-8 h-6 text-gray-300 pointer-events-none ${
+              !isUserNameInputEmpty && "text-xs -translate-y-0"
+            } 
+            ${userNameInputHasError && "text-rose-400"}
+            duration-200`}
+          >
+            User Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            onChange={userNameChangeHandler}
+            onBlur={userNameInputBlurHandler}
+            value={enteredUserName}
+            onFocus={userNameOnFocusHandler}
+            className={`border-2 w-full p-2 rounded-md  bg-transparent
+            ${userNameInputHasError && "border-rose-400"}
+            `}
+          />
+        </div>
+        <div className="flex flex-col w-full justify-center items-center">
+          <label
+            className={`translate-y-8 h-6 text-gray-300 pointer-events-none ${
+              !isPasswordInputEmpty && "text-xs -translate-y-0"
+            } 
+            ${passwordInputHasError && "text-rose-400"}
+            duration-200`}
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            autoComplete="off"
+            onChange={passwordChangeHandler}
+            onBlur={passwordInputBlurHandler}
+            value={enteredPassword}
+            onFocus={passwordFocusHandler}
+            className={`border-2 w-full p-2 rounded-md  bg-transparent ${
+              passwordInputHasError && "border-rose-400"
+            }`}
+          />
+        </div>
         <button
           type="submit"
-          className="flex bg-sky-500 items-center justify-center text-white rounded-xl w-full p-4"
+          className="flex bg-sky-500 items-center justify-center text-white rounded-xl w-full p-4 mt-4"
         >
           {loading ? <Loading /> : "Login"}
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

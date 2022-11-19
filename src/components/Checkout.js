@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { HiChevronLeft } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../app/slicer";
-import Input from "./UI/Input";
+import useInput from "../hooks/use-input";
 
 import { titleCase } from "title-case";
-import { toast } from "react-toastify";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -16,58 +15,66 @@ const Checkout = () => {
   const userStreet = titleCase(user.address.street);
   // const user = slice.user;
 
-  const [cartHolder, setCartHolder] = useState("**** ****");
-  const [cartNumber, setCartNumber] = useState("**** **** **** ****");
-  const [cartExpMonth, setCartExpMonth] = useState("**");
-  const [cartExpYear, setCartExpYear] = useState("**");
-  const [cartCVC, setCartCVC] = useState("***");
-  const onInputChange = (strokes, placeHolder) => {
-    switch (placeHolder) {
-      case "Cart Number":
-        if (strokes.trim() === "") {
-          setCartNumber("**** **** **** ****");
-          return;
-        }
-        setCartNumber(strokes);
-        break;
-      case "Cart Holder":
-        if (strokes.trim() === "") {
-          setCartHolder("**** ****");
-          return;
-        }
-        setCartHolder(strokes);
-        break;
-      case "Exp. Month":
-        if (strokes.trim() === "") {
-          setCartExpMonth("**");
-          return;
-        }
-        setCartExpMonth(strokes);
-        break;
-      case "Exp. Year":
-        if (strokes.trim() === "") {
-          setCartExpYear("**");
-          return;
-        }
-        setCartExpYear(strokes);
-        break;
-      case "CVC":
-        if (strokes.trim() === "") {
-          setCartCVC("***");
-          return;
-        }
-        setCartCVC(strokes);
-        break;
-      default:
-        break;
-    }
-  };
+  const {
+    value: enteredCardHolder,
+    hasError: cardHolderInputHasError,
+    isValid: cardHolderInputIsValid,
+    valueChangeHandler: cardHolderChangeHandler,
+    inputBlurHandler: cardHolderInputBlurHandler,
+    focusHandler: cardHolderOnFocusHandler,
+    isFocused: cardHolderIsFocused,
+    isEmpty: isCardHolderInputEmpty,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredCardNumber,
+    hasError: cardNumberInputHasError,
+    isValid: cardNumberInputIsValid,
+    valueChangeHandler: cardNumberChangeHandler,
+    inputBlurHandler: cardNumberInputBlurHandler,
+    focusHandler: cardNumberOnFocusHandler,
+    isFocused: cardNumberIsFocused,
+    isEmpty: isCardNumberInputEmpty,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredCardExpMonth,
+    hasError: cardExpMonthInputHasError,
+    isValid: cardExpMonthInputIsValid,
+    valueChangeHandler: cardExpMonthChangeHandler,
+    inputBlurHandler: cardExpMonthInputBlurHandler,
+    focusHandler: cardExpMonthOnFocusHandler,
+    isFocused: cardExpMonthIsFocused,
+    isEmpty: isCardExpMonthInputEmpty,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredCardExpYear,
+    hasError: cardExpYearInputHasError,
+    isValid: cardExpYearInputIsValid,
+    valueChangeHandler: cardExpYearChangeHandler,
+    inputBlurHandler: cardExpYearInputBlurHandler,
+    focusHandler: cardExpYearOnFocusHandler,
+    isFocused: cardExpYearIsFocused,
+    isEmpty: isCardExpYearInputEmpty,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredCardCVC,
+    hasError: cardCVCInputHasError,
+    isValid: cardCVCInputIsValid,
+    valueChangeHandler: cardCVCChangeHandler,
+    inputBlurHandler: cardCVCInputBlurHandler,
+    focusHandler: cardCVCOnFocusHandler,
+    isFocused: cardCVCIsFocused,
+    isEmpty: isCardCVCInputEmpty,
+  } = useInput((value) => value.trim() !== "");
 
   return (
     <>
       {!isLoggedIn && (
         <>
-          <div className="font-montserrat flex w-full h-[calc(100vh-360px)] justify-center items-center">
+          <div className="flex w-full h-[calc(100vh-360px)] justify-center items-center">
             You Need to Login to Continue
           </div>
           <button
@@ -80,21 +87,8 @@ const Checkout = () => {
       )}
       {isLoggedIn && (
         <>
-          <div className="flex flex-row items-center justify-between w-full max-w-7xl mt-1 md:mt-4 dark:text-slate-300 pl-4 pr-4">
-            <div
-              onClick={() => {
-                dispatch(setCurrentPage("cart"));
-              }}
-              className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white  dark:bg-slate-700 dark:border-slate-500"
-            >
-              <HiChevronLeft size={25} />
-            </div>
-            <div className="w-full font-semibold flex text-lg h-12 justify-center items-center p-4">
-              <div className="flex">Checkout</div>
-            </div>
-            <div className="w-12 h-12 opacity-0"></div>
-          </div>
-          <div className="flex flex-col justify-start items-center w-full h-[calc(100vh-200px)] font-montserrat">
+          <div className="flex flex-col justify-start items-center w-full h-[calc(100vh-200px)]  dark:text-slate-300">
+            {/* BlueCard */}
             <div className="flex flex-col w-full max-w-sm p-4">
               <div className="flex flex-col w-full h-52 bg-sky-500 border-b-2 border-sky-600 rounded-3xl p-10 justify-between shadow-xl">
                 <div>
@@ -102,7 +96,7 @@ const Checkout = () => {
                     Card Holder
                   </div>
                   <div className="text-white font-semibold tracking-wide text-sm">
-                    {cartHolder}
+                    **
                   </div>
                 </div>
                 <div>
@@ -110,7 +104,7 @@ const Checkout = () => {
                     Card Number
                   </div>
                   <div className="flex justify-between text-white font-semibold tracking-wide text-2xl">
-                    <div>{cartNumber}</div>
+                    <div>**</div>
                   </div>
                 </div>
                 <div className="flex justify-between w-36">
@@ -119,8 +113,8 @@ const Checkout = () => {
                       Exp. Date
                     </div>
                     <div className="text-white flex font-semibold tracking-wide text-sm">
-                      <div>{cartExpMonth}</div>&nbsp;{"/"}&nbsp;
-                      <div>{cartExpYear}</div>
+                      <div>**</div>&nbsp;{"/"}&nbsp;
+                      <div>**</div>
                     </div>
                   </div>
                   <div>
@@ -128,60 +122,172 @@ const Checkout = () => {
                       CVC
                     </div>
                     <div className="text-white font-semibold tracking-wide text-sm">
-                      {cartCVC}
+                      **
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full items-center mt-2 gap-4 p-4">
-              <Input
-                type={"text"}
-                onInputChange={onInputChange}
-                placeHolder="Cart Holder"
-                styles={
-                  "w-full max-w-xl h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300"
-                }
-              />
-              <Input
-                type={"number"}
-                maxLength={16}
-                onInputChange={onInputChange}
-                placeHolder="Cart Number"
-                styles={
-                  "w-full max-w-xl h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300"
-                }
-              />
-              <div className="flex w-full gap-4 max-w-xl">
-                <Input
-                  type={"number"}
-                  maxLength={2}
-                  onInputChange={onInputChange}
-                  placeHolder="Exp. Month"
-                  styles={
-                    "w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"
-                  }
-                />
-                <Input
-                  type={"number"}
-                  maxLength={2}
-                  onInputChange={onInputChange}
-                  placeHolder="Exp. Year"
-                  styles={
-                    "w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"
-                  }
-                />
-                <Input
-                  type={"number"}
-                  maxLength={3}
-                  onInputChange={onInputChange}
-                  placeHolder="CVC"
-                  styles={
-                    "w-full h-12 border rounded-xl p-4  dark:bg-transparent dark:text-slate-300 grow"
-                  }
+
+            {/* Form */}
+            <form className="flex flex-col max-w-xl w-full justify-center items-center p-4  md:p-0 md:pt-4">
+
+              {/* Card Holder */}
+              <div className="flex flex-col w-full">
+                <label
+                  className={`
+                  ${
+                    isCardHolderInputEmpty
+                      ? "translate-y-8 translate-x-6"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                  ${
+                    !cardHolderIsFocused
+                      ? "translate-y-8 translate-x-6"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                  ${cardHolderInputHasError && "text-rose-500"}
+                  flex justify-center items-center w-24 h-4 p-1 text-xs bg-white dark:bg-slate-800 pointer-events-none`}
+                >
+                  Card Holder
+                </label>
+                <input
+                  onChange={cardHolderChangeHandler}
+                  onBlur={cardHolderInputBlurHandler}
+                  value={enteredCardHolder}
+                  onFocus={cardHolderOnFocusHandler}
+                  className={` ${
+                    cardHolderInputHasError && "border-rose-500"
+                  }  flex w-full bg-transparent rounded-xl border p-2 pt-3 pl-5 pb-3`}
                 />
               </div>
-            </div>
+
+              {/* Card Number */}
+              <div className="flex flex-col w-full">
+                <label
+                  className={`
+                  ${
+                    isCardNumberInputEmpty
+                      ? "translate-y-8 translate-x-6"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                  ${
+                    !cardNumberIsFocused
+                      ? "translate-y-8 translate-x-6"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                   ${
+                     cardNumberInputHasError && "text-rose-500"
+                   } flex justify-center items-center w-24 h-4 p-1 text-xs bg-white dark:bg-slate-800 pointer-events-none`}
+                >
+                  Card Number
+                </label>
+                <input
+                  onChange={cardNumberChangeHandler}
+                  onBlur={cardNumberInputBlurHandler}
+                  value={enteredCardNumber}
+                  onFocus={cardNumberOnFocusHandler}
+                  className={`
+                  ${cardHolderInputHasError && "border-rose-500"} 
+                  flex w-full bg-transparent rounded-xl border p-2 pt-3 pl-5 pb-3`}
+                />
+              </div>
+
+              {/* Cart Exp Month */}
+              <div className="flex flex-row gap-4 w-full">
+                <div>
+                <label
+                  className={`
+                  ${
+                    isCardExpMonthInputEmpty
+                      ? "translate-y-8 translate-x-4"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                  ${
+                    !cardExpMonthIsFocused
+                      ? "translate-y-8 translate-x-4"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                   ${
+                     cardExpMonthInputHasError && "text-rose-500"
+                   } flex justify-center items-center w-12 h-4 p-1 text-xs bg-white dark:bg-slate-800 pointer-events-none`}
+                >
+                  Month
+                </label>
+                <input
+                  onChange={cardExpMonthChangeHandler}
+                  onBlur={cardExpMonthInputBlurHandler}
+                  value={enteredCardExpMonth}
+                  onFocus={cardExpMonthOnFocusHandler}
+                  className={`
+                  ${cardExpMonthInputHasError && "border-rose-500"} 
+                  flex w-full bg-transparent rounded-xl border p-2 pt-3 pl-5 pb-3`}
+                />
+                </div>
+
+                {/* Cart Exp Year */}
+                <div>
+                <label
+                  className={`
+                  ${
+                    isCardExpYearInputEmpty
+                      ? "translate-y-8 translate-x-4"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                  ${
+                    !cardExpYearIsFocused
+                      ? "translate-y-8 translate-x-4"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                   ${
+                     cardExpYearInputHasError && "text-rose-500"
+                   } flex justify-center items-center w-12 h-4 p-1 text-xs bg-white dark:bg-slate-800 pointer-events-none`}
+                >
+                  Year
+                </label>
+                <input
+                  onChange={cardExpYearChangeHandler}
+                  onBlur={cardExpYearInputBlurHandler}
+                  value={enteredCardExpYear}
+                  onFocus={cardExpYearOnFocusHandler}
+                  className={`
+                  ${cardExpYearInputHasError && "border-rose-500"} 
+                  flex w-full bg-transparent rounded-xl border p-2 pt-3 pl-5 pb-3`}
+                />
+                </div>
+
+                {/* Card CVC */}
+                <div>
+                <label
+                  className={`
+                  ${
+                    isCardCVCInputEmpty
+                      ? "translate-y-8 translate-x-4"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                  ${
+                    !cardCVCIsFocused
+                      ? "translate-y-8 translate-x-4"
+                      : "translate-y-2 translate-x-6"
+                  } 
+                   ${
+                     cardCVCInputHasError && "text-rose-500"
+                   } flex justify-center items-center w-12 h-4 p-1 text-xs bg-white dark:bg-slate-800 pointer-events-none`}
+                >
+                  CVC
+                </label>
+                <input
+                  onChange={cardCVCChangeHandler}
+                  onBlur={cardCVCInputBlurHandler}
+                  value={enteredCardCVC}
+                  onFocus={cardCVCOnFocusHandler}
+                  className={`
+                  ${cardCVCInputHasError && "border-rose-500"} 
+                  flex w-full bg-transparent rounded-xl border p-2 pt-3 pl-5 pb-3`}
+                />
+                </div>
+              </div>
+            </form>
             <div className="flex gap-4 mt-4 mb-4 p-4 md:p-0 flex-col items-start justify-start w-full max-w-xl  dark:text-slate-300">
               <div className="flex flex-col w-full">
                 <div>Adress Info</div>
@@ -197,39 +303,14 @@ const Checkout = () => {
                 </div>
               </div>
             </div>
-            <button
-              onClick={() => {
-                if (
-                  cartHolder.includes("*") ||
-                  cartNumber.includes("*") ||
-                  cartExpMonth.includes("*") ||
-                  cartExpYear.includes("*") ||
-                  cartCVC.includes("*")
-                ) {
-                  toast.error("Fields can't be empty", {
-                    position: "top-center",
-                    autoClose: 500,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                  });
-                  return;
-                }
-                dispatch(setCurrentPage("checkoutSuccess"));
-              }}
-              className="font-montserrat capitalize fixed md:flex bottom-[70px] md:bottom-auto md:max-w-xl md:relative w-11/12 md:w-full rounded-xl p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
-            >
+            <button className="capitalize fixed md:flex bottom-[100px] md:bottom-auto md:max-w-xl md:relative w-11/12 md:w-full rounded-xl p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center">
               <div className="flex justify-center items-center text-xl">
                 Finish Order
                 <HiChevronLeft className="rotate-180" />
               </div>
             </button>
           </div>
-      <div className={`h-32 w-full visible lg:hidden `}></div>
-
+          <div className={`h-32 w-full visible lg:hidden `}></div>
         </>
       )}
     </>

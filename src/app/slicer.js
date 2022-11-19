@@ -30,7 +30,10 @@ const initialState = {
     },
     phone: "",
   },
-  darkMode: false,
+  isDarkModeActive: false,
+  isToasterActive: false,
+  toasterMsg: "",
+  toasterSuccess: true,
 };
 
 const uiSlice = createSlice({
@@ -127,17 +130,22 @@ const uiSlice = createSlice({
         JSON.stringify(state.totalCartAmount)
       );
     },
-    darkModeHandler(state, action) {
-      state.darkMode = action.payload;
-      if (state.darkMode) {
+    darkModeToggle(state, action) {
+      state.isDarkModeActive = action.payload;
+      if (state.isDarkModeActive) {
         document.getElementById("root").classList.add("dark");
         document.body.style.backgroundColor = "#1e293b";
-        localStorage.setItem("darkMode", true);
+        localStorage.setItem("isDarkModeActive", true);
       } else {
         document.getElementById("root").classList.remove("dark");
         document.body.style.backgroundColor = "white";
-        localStorage.setItem("darkMode", false);
+        localStorage.setItem("isDarkModeActive", false);
       }
+    },
+    setDarkModeActive(state) {
+      document.getElementById("root").classList.add("dark");
+      document.body.style.backgroundColor = "#1e293b";
+      state.isDarkModeActive = true;
     },
     userLoginState(state, action) {
       const { status, user } = action.payload;
@@ -201,6 +209,12 @@ const uiSlice = createSlice({
         (product) => product.category === value
       );
     },
+    toasterHandler(state, action) {
+      const { status, msg, success } = action.payload;
+      state.isToasterActive = status;
+      state.toasterMsg = msg;
+      state.toasterSuccess = success;
+    },
   },
 });
 
@@ -212,10 +226,12 @@ export const {
   addLocalCartItems,
   deleteItemFromCart,
   totalCartAmountCalc,
-  darkModeHandler,
+  darkModeToggle,
   userLoginState,
   sortHandler,
   filterStateHandler,
+  setDarkModeActive,
+  toasterHandler,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

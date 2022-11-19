@@ -16,6 +16,7 @@ export const SortHandler = () => {
   const products = slice.products;
   const darkMode = slice.darkMode;
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(sortHandler({ selectedOption, products }));
     // eslint-disable-next-line
@@ -54,7 +55,7 @@ export const SortHandler = () => {
 
 
   return (
-    <div className="w-48 flex font-montserrat justify-end text-right pr-8 mt-4">
+    <div className="w-48 flex justify-end text-right pr-8">
       <Select
         onChange={setSelectedOption}
         placeholder={"Sort"}

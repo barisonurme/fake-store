@@ -2,7 +2,11 @@ import { useSelector } from "react-redux";
 import { HiChevronLeft } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { setCurrentPage, addProductToCart } from "../../app/slicer";
+import {
+  setCurrentPage,
+  addProductToCart,
+  toasterHandler,
+} from "../../app/slicer";
 import { toast } from "react-toastify";
 
 const Product = () => {
@@ -27,23 +31,7 @@ const Product = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4 dark:text-slate-300">
-        <div
-          onClick={() => {
-            if (!zoom) {
-              disaptch(setCurrentPage("main"));
-            } else setZoom(false);
-          }}
-          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white  dark:bg-slate-700 dark:border-slate-500"
-        >
-          <HiChevronLeft size={25} />
-        </div>
-        <div className="w-full max-w-7xl font-semibold flex text-lg h-12 justify-center items-center p-4">
-          <div className="flex font-montserrat">Product Details</div>
-        </div>
-        <div className="w-12 h-12 opacity-0"></div>
-      </div>
-      <div className="p-4 w-full justify-start max-w-7xl grid grid-flow-col-1 md:grid-cols-2 gap-1 md:gap-8  dark:text-slate-300">
+      <div className="p-4 w-full m-auto justify-start max-w-7xl grid grid-flow-col-1 md:grid-cols-2 gap-1 md:gap-8  dark:text-slate-300">
         {zoom && (
           <div
             onClick={() => setZoom(false)}
@@ -65,16 +53,16 @@ const Product = () => {
           />
         </section>
         <section className="flex flex-col justify-center items-center w-full p-4 md:p-10">
-          <div className="flex w-full font-semibold text-lg lg:text-4xl text-left font-montserrat">
+          <div className="flex w-full font-semibold text-lg lg:text-4xl text-left">
             {selectedProduct.title}
           </div>
-          <div className="flex w-full font-light text-xs lg:text-lg mt-2 text-left font-montserrat">
+          <div className="flex w-full font-light text-xs lg:text-lg mt-2 text-left">
             {selectedProduct.description}
           </div>
-          <div className="flex w-full items-center font-bold text-3xl mt-2 font-montserrat">
+          <div className="flex w-full items-center font-bold text-3xl mt-2">
             ${selectedProduct.price}
           </div>
-          <div className="flex w-full select-none align-middle items-center font-montserrat">
+          <div className="flex w-full select-none align-middle items-center">
             <div
               onClick={() => quantityHandler("increase")}
               className="flex justify-center w-8 h-8 rounded-full cursor-pointer text-xl border"
@@ -93,18 +81,11 @@ const Product = () => {
             onClick={() => {
               disaptch(addProductToCart({ selectedProduct, quantity }));
               disaptch(setCurrentPage("main"));
-              toast.success("Product Added to Cart", {
-                position: "top-center",
-                autoClose: 500,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+              disaptch(
+                toasterHandler({ status: true, msg: "Product Added to Cart", success: true })
+              );
             }}
-            className="font-montserrat fixed bottom-[70px] md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
+            className="fixed bottom-[100px] md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
           >
             <div className="text-xs">
               Total: ${(selectedProduct.price * quantity).toFixed(2)}

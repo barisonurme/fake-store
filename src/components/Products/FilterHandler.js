@@ -42,12 +42,12 @@ const FilterHandler = (props) => {
       text: darkMode ? "white" : "black",
       // match with the menu
       borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
-      // Overwrittes the different states of border
+      // Overwrites the different states of border
       borderColor: "#334155",
       // Removes weird border around container
       boxShadow: state.isFocused ? null : null,
       "&:hover": {
-        // Overwrittes the different states of border
+        // Overwrites the different states of border
         borderColor: "#0ea5e9",
       },
     }),
@@ -66,7 +66,7 @@ const FilterHandler = (props) => {
   };
 
   return (
-    <div className="font-montserrat flex flex-row w-full items-center pl-8 mt-4">
+    <div className="flex flex-row w-full items-center pl-8">
       <Select
         onChange={setSelectedOption}
         className="w-40 cursor-pointer appearance-none"

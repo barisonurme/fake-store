@@ -24,22 +24,8 @@ const Cart = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between w-full max-w-7xl mt-1 md:mt-4 pl-4 pr-4 dark:text-slate-300">
-        <div
-          onClick={() => {
-            dispatch(setCurrentPage("main"));
-          }}
-          className="w-12 h-12 border rounded-xl flex justify-center items-center lg:mr-10 bg-white  dark:bg-slate-700 dark:border-slate-500"
-        >
-          <HiChevronLeft size={25} />
-        </div>
-        <div className="w-full max-w-7xl font-semibold flex text-lg h-12 justify-center items-center p-4">
-          <div className="flex font-montserrat">Your Cart</div>
-        </div>
-        <div className="w-12 h-12 opacity-0"></div>
-      </div>
       {cartItems.length === 0 && (
-        <div className="h-96 flex justify-center items-center">
+        <div className="h-96 flex justify-center items-center dark:text-slate-300">
           Cart is Empty
         </div>
       )}
@@ -47,21 +33,21 @@ const Cart = () => {
         {cartItems.map((product) => (
           <ul
             key={product.id}
-            className="flex justify-between items-center w-full border dark:border-slate-700 dark:text-slate-300 p-1 mb-2"
+            className="flex justify-between items-center w-full border dark:border-b-2 rounded-md dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 p-1 mb-2"
           >
-            <div className="flex grow-1 justify-center w-12 h-12 m-4">
+            <div className="flex grow-1 justify-center items-center w-12 h-12 p-4 rounded-md m-2 bg-white">
               <img
                 alt={product.title}
                 src={product.image}
-                className="object-contain h-12"
+                className="object-contain h-6"
               />
             </div>
             <div className="flex flex-col grow flex-wrap">
-              <div className="font-montserrat font-medium">{product.title}</div>
-              <div className="font-montserrat font-semibold text-xs">
+              <div className="font-medium">{product.title}</div>
+              <div className="font-semibold text-xs">
                 {product.quantity} piece
               </div>
-              <div className="font-montserrat text-xl font-semibold">
+              <div className="text-xl font-semibold">
                 ${product.price}
               </div>
             </div>
@@ -82,7 +68,7 @@ const Cart = () => {
         <>
           <button
             onClick={() => dispatch(setCurrentPage("checkout"))}
-            className="font-montserrat fixed bottom-[70px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
+            className="fixed bottom-[100px] md:max-w-xl md:bottom-0 md:relative w-11/12 md:w-full rounded-md p-2 mt-2 bg-sky-500 text-white font-bold text-xl justify-center items-center"
           >
             <div className="text-xs">Total Amount: {totalCartAmount}</div>
             <div className="flex justify-center items-center text-2xl">

@@ -68,7 +68,7 @@ const ProductList = (props) => {
   return (
     <>
       {currentPage === "main" && (
-        <div className="flex flex-col w-full max-w-7xl dark:text-slate-300">
+        <div className="flex flex-col w-full max-w-7xl dark:text-slate-300 mt-2 m-auto">
           <div className="flex w-full max-w-7xl z-0">
             <FilterHandler categories={categories} />
             <SortHandler />
@@ -117,7 +117,7 @@ const ProductList = (props) => {
       {currentPage === "product" && <Product />}
       {firstLoading && hasMore && currentPage === "main" && (
         <>
-          <div className="fixed bg-sky-500 z-50 bottom-16 rounded-xl p-4 text-white">
+          <div className="fixed bg-sky-500 z-50 text-xs tracking-wider bottom-[100px] rounded-xl p-4 text-white">
             Scroll to Load more Product
           </div>
         </>

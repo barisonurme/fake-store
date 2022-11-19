@@ -10,11 +10,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Flip } from "react-toastify";
 import { GoToCart } from "./components/Cart/GoToCart";
-import { addLocalCartItems, darkModeHandler } from "./app/slicer";
+import { addLocalCartItems, setDarkModeActive } from "./app/slicer";
 import Settings from "./components/Settings";
 import UserLogin from "./components/UserLogin";
 import Checkout from "./components/Checkout";
 import CheckoutSuccess from "./components/CheckoutSuccess";
+import BreadcrumbNavigation from "./components/Products/BreadcrumbNavigation";
+import Toaster from "./components/UI/Toaster";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,41 +27,42 @@ function App() {
       localStorage.getItem("cartItemsQuantity")
     );
     const totalCartAmount = JSON.parse(localStorage.getItem("totalCartAmount"));
+    const isDarkModeActive = localStorage.getItem("isDarkModeActive");
+    if (isDarkModeActive === "true") dispatch(setDarkModeActive());
     if (localCartItems === null) return;
     dispatch(
       addLocalCartItems({ localCartItems, cartItemsQuantity, totalCartAmount })
     );
-    const darkMode = localStorage.getItem("darkMode");
-    console.log(darkMode)
-    if (darkMode) dispatch(darkModeHandler());
     // eslint-disable-next-line
   }, []);
 
-  const headerHeight = "h-16";
-  const footerHeight = "h-14";
+  const headerHeight = "h-14";
+  const footerHeight = "h-20";
 
-  const slice = useSelector((store) => store.uiSlice);
-  const currentPage = slice.currentPage;
-  const cartItemsQuantity = slice.cartItemsQuantity;
+  const { currentPage, cartItemsQuantity }  = useSelector((store) => store.uiSlice);
 
   return (
-    <div className="flex flex-col max-h-max justify-start items-center w-full">
+    <div className="font-montserrat w-full flex flex-col items-center">
       {currentPage === "main" && (
         <div className="z-50">
           <GoToCart cartItemsQuantity={cartItemsQuantity} />
         </div>
       )}
       <ToastContainer transition={Flip} />
+      <Toaster />
+      <div className={headerHeight}></div>
       <Header headerHeight={headerHeight} />
       <Footer footerHeight={footerHeight} />
-      <div className={headerHeight}></div>
+      {currentPage !== "main" && (
+        <BreadcrumbNavigation headerHeight={headerHeight} />
+      )}
       <ProductList />
       {currentPage === "cart" && <Cart />}
       {currentPage === "settings" && <Settings />}
       {currentPage === "login" && <UserLogin />}
       {currentPage === "checkout" && <Checkout />}
       {currentPage === "checkoutSuccess" && <CheckoutSuccess />}
-      <div className={`${footerHeight} w-full visible lg:hidden `}></div>
+      <div className={`${footerHeight} w-full visible lg:hidden `} />
     </div>
   );
 }

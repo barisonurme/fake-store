@@ -13,28 +13,30 @@ export const Header = (props) => {
   const cartItemsQuantity = slice.cartItemsQuantity;
 
   return (
-    <div
-      className={`fixed top-0 flex justify-center ${headerHeight} w-full bg-gray-900 z-10`}
-    >
+    <>
       <div
-        className={`flex fixed top-0 justify-between max-w-7xl w-full ${headerHeight} bg-gray-900 items-center p-4 text-white`}
+        className={`fixed top-0 flex justify-center ${headerHeight} w-full bg-gray-900 z-10`}
       >
         <div
-          onClick={() => dispatch(setCurrentPage("main"))}
-          className="text-xl font-extrabold text-sky-500 cursor-pointer font-montserrat"
+          className={`flex fixed top-0 justify-between max-w-7xl w-full ${headerHeight} bg-gray-900 items-center p-4 text-white`}
         >
-          fakestore
-        </div>
-        <div className="flex items-center">
-          {currentPage !== "login" && <HeaderUser />}
-          {isLoggedIn && (
-            <div className="flex">
-              <HeaderCart cartItemsQuantity={cartItemsQuantity} />
-            </div>
-          )}
+          <div
+            onClick={() => dispatch(setCurrentPage("main"))}
+            className="text-xl font-extrabold text-sky-500 cursor-pointer"
+          >
+            fakestore
+          </div>
+          <div className="flex items-center">
+            {currentPage !== "login" && <HeaderUser />}
+            {isLoggedIn && (
+              <div className="flex">
+                <HeaderCart cartItemsQuantity={cartItemsQuantity} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
