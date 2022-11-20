@@ -18,7 +18,6 @@ const ProductList = (props) => {
   const currentPage = slice.currentPage;
   const filteredProducts = slice.filteredProducts;
   const [hasMore, setHasMore] = useState(true);
-  const [firstLoading, setFirstLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [limit, setLimit] = useState(10);
 
@@ -38,12 +37,12 @@ const ProductList = (props) => {
 
   useEffect(() => {
     // TODO: Trying solution for infinite scroll work.
-    if (document.body.clientHeight <= window.innerHeight) {
-      setLimit(20);
-    }
+    // if (document.body.clientHeight <= window.innerHeight) {
+    //   setLimit(5);
+    // }
 
     FetchDataStart(limit);
-    setLimit((limit) => limit + 10);
+    setLimit((limit) => limit + 5);
     // eslint-disable-next-line
   }, []);
 
@@ -59,10 +58,9 @@ const ProductList = (props) => {
     setCategories(tempCategories);
 
     dispatch(setProducts(fetchedProducts));
-    if (filteredProducts.length === 0 || filteredProducts.length < 20) {
-      setHasMore(false);
-    }
-    setLimit(+10);
+    if (filteredProducts.length >= 20) setHasMore(false);
+
+    setLimit((limit) => limit + 5);
   };
 
   return (
@@ -115,7 +113,7 @@ const ProductList = (props) => {
         </div>
       )}
       {currentPage === "product" && <Product />}
-      {firstLoading && hasMore && currentPage === "main" && (
+      {hasMore && currentPage === "main" && (
         <>
           <div className="fixed bg-sky-500 z-50 text-xs tracking-wider bottom-[100px] rounded-xl p-4 text-white">
             Scroll to Load more Product

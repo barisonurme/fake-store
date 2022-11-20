@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { HiChevronLeft } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import {
@@ -7,7 +6,6 @@ import {
   addProductToCart,
   toasterHandler,
 } from "../../app/slicer";
-import { toast } from "react-toastify";
 
 const Product = () => {
   const [zoom, setZoom] = useState(false);

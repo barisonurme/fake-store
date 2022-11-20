@@ -29,11 +29,11 @@ const Cart = () => {
           Cart is Empty
         </div>
       )}
-      <div ref={parent} className="w-full max-w-7xl flex flex-col p-4">
+      <div ref={parent} className="w-full max-w-7xl flex flex-col p-4 gap-2" role="list">
         {cartItems.map((product) => (
           <ul
             key={product.id}
-            className="flex justify-between items-center w-full border dark:border-b-2 rounded-md dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 p-1 mb-2"
+            className="flex justify-between items-center w-full border dark:border-b-2 rounded-md dark:border-slate-600 dark:bg-slate-700 dark:text-slate-300 p-1"
           >
             <div className="flex grow-1 justify-center items-center w-12 h-12 p-4 rounded-md m-2 bg-white">
               <img

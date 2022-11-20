@@ -14,7 +14,6 @@ const UserLogin = (props) => {
     valueChangeHandler: userNameChangeHandler,
     inputBlurHandler: userNameInputBlurHandler,
     focusHandler: userNameOnFocusHandler,
-    isFocused: userNameIsFocused,
     isEmpty: isUserNameInputEmpty,
   } = useInput((value) => value.trim() !== "");
 
@@ -25,7 +24,6 @@ const UserLogin = (props) => {
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordInputBlurHandler,
     focusHandler: passwordFocusHandler,
-    isFocused: passwordIsFocused,
     isEmpty: isPasswordInputEmpty,
   } = useInput((value) => value !== "");
 
@@ -86,7 +84,7 @@ const UserLogin = (props) => {
             onBlur={userNameInputBlurHandler}
             value={enteredUserName}
             onFocus={userNameOnFocusHandler}
-            className={`border-2 w-full p-2 rounded-md  bg-transparent
+            className={`border-2 focus:border-sky-500 focus:text-sky-500 w-full p-2 rounded-md  bg-transparent
             ${userNameInputHasError && "border-rose-400"}
             `}
           />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { HiChevronLeft } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage, toasterHandler } from "../app/slicer";
@@ -13,7 +13,6 @@ const Checkout = () => {
   const user = slice.user;
   const userCity = titleCase(user.address.city);
   const userStreet = titleCase(user.address.street);
-  // const user = slice.user;
 
   const {
     value: enteredCardHolder,

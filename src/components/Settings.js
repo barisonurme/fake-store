@@ -1,7 +1,5 @@
 import React from "react";
-import { HiChevronLeft } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import {
   darkModeToggle,
   setCurrentPage,
