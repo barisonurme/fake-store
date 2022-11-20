@@ -57,7 +57,7 @@ const UserLogin = (props) => {
     dispatch(
       toasterHandler({
         status: true,
-        msg: `Welcom, ${user.name.firstname}`,
+        msg: `Welcome, ${user.name.firstname}`,
         success: true,
       })
     );
