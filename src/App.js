@@ -6,9 +6,6 @@ import Header from "./components/Header";
 import Cart from "./components/Cart/Cart";
 import ProductList from "./components/Products/ProductList";
 import { useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Flip } from "react-toastify";
 import { GoToCart } from "./components/Cart/GoToCart";
 import { addLocalCartItems, setDarkModeActive } from "./app/slicer";
 import Settings from "./components/Settings";
@@ -48,7 +45,6 @@ function App() {
           <GoToCart cartItemsQuantity={cartItemsQuantity} />
         </div>
       )}
-      <ToastContainer transition={Flip} />
       <Toaster />
       <div className={headerHeight}></div>
       <Header headerHeight={headerHeight} />
