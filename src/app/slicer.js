@@ -71,6 +71,8 @@ const uiSlice = createSlice({
       );
     },
     setCurrentPage(state, action) {
+      if (action.payload === "main") document.body.style.minHeight = "101vh";
+      else document.body.style.minHeight = "100vh"
       state.currentPage = action.payload;
     },
     setSelectedProduct(state, action) {

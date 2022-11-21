@@ -104,9 +104,9 @@ const UserLogin = (props) => {
           </label>
           <div
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute bg-slate-200/50 right-4 translate-y-3 cursor-pointer"
+            className="absolute text-slate-300 right-4 translate-y-3 cursor-pointer"
           >
-            {showPassword ? <BiHide /> : <BiShow />}
+            {showPassword ? <BiHide size={18}/> : <BiShow size={18}/>}
           </div>
           <input
             type={showPassword ? "text" : "password"}

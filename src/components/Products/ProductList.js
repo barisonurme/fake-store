@@ -36,11 +36,6 @@ const ProductList = (props) => {
   };
 
   useEffect(() => {
-    // TODO: Trying solution for infinite scroll work.
-    // if (document.body.clientHeight <= window.innerHeight) {
-    //   setLimit(5);
-    // }
-
     FetchDataStart(limit);
     setLimit((limit) => limit + 5);
     // eslint-disable-next-line
